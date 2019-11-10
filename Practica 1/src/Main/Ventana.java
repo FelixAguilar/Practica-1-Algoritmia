@@ -4,6 +4,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,13 +18,17 @@ import javax.swing.border.EmptyBorder;
  */
 public class Ventana extends JFrame {
     
+    Operations o = new Operations();
+    
     //Constantes del menú.
-    private final String TITULO = "Actividad 3";
-    private final String CREAR = "Crear nodo";
-    private final String ELIMINAR = "Eliminar nodo";
-    private final String ELIMINARK = "Eliminar k-esimo nodo";
-    private final String CREARO = "Añadir nodo ordenado";
-    private final String MOSTRAR = "Mostrar lista";
+    private final String TITULO = "Practica 1";
+    private final String NUEVOCURSO = "Añadir curso";
+    private final String MATRICULAESTUDIANTE = "Matricular un estudiante";
+    private final String ELIMINARCURSO = "Dar de baja un curso";
+    private final String ELIMINARASIGNATURA = "Dar de baja una asignatura";
+    private final String MOSTRARCURSO = "Mostrar el contenido de un curso";
+    private final String MOSTRARASIGNATURA = "Mostrar el contenido de una asignatura";
+    private final String MOSTRARESTUDIANTE = "Mostrar el contenido de un estudiante";
     private final String SALIR = "Salir";
     
     public static void main(String[] args) {
@@ -56,30 +61,40 @@ public class Ventana extends JFrame {
 
         JPanel butones = new JPanel(new GridBagLayout());
 
-        //Boton de crear cuenta.
-        JButton botonCrear = new JButton();
-        botonCrear.setText(CREAR);
-        butones.add(botonCrear, gbc);
+        //Boton de crear curso.
+        JButton botonNuevoCurso = new JButton();
+        botonNuevoCurso.setText(NUEVOCURSO);
+        butones.add(botonNuevoCurso, gbc);
 
         //Boton de buscar por cuenta.
         JButton botonEliminar = new JButton();
-        botonEliminar.setText(ELIMINAR);
+        botonEliminar.setText(MATRICULAESTUDIANTE);
         butones.add(botonEliminar, gbc);
 
         //Boton de buscar por usuario.
         JButton botonEliminarK = new JButton();
-        botonEliminarK.setText(ELIMINARK);
+        botonEliminarK.setText(ELIMINARCURSO);
         butones.add(botonEliminarK, gbc);
 
         //Boton de ingresar dinero a cuenta.
         JButton botonCrearO = new JButton();
-        botonCrearO.setText(CREARO);
+        botonCrearO.setText(ELIMINARASIGNATURA);
         butones.add(botonCrearO, gbc);
 
         //Boton de extraer dinero de cuenta.
         JButton botonMostrar = new JButton();
-        botonMostrar.setText(MOSTRAR);
+        botonMostrar.setText(MOSTRARCURSO);
         butones.add(botonMostrar, gbc);
+        
+        //Boton de extraer dinero de cuenta.
+        JButton botonMostrard = new JButton();
+        botonMostrard.setText(MOSTRARASIGNATURA);
+        butones.add(botonMostrard, gbc);
+        
+        //Boton de extraer dinero de cuenta.
+        JButton botonMostrardd = new JButton();
+        botonMostrardd.setText(MOSTRARESTUDIANTE);
+        butones.add(botonMostrardd, gbc);
 
         //Boton de salir.
         JButton botonSalir= new JButton();
@@ -90,27 +105,27 @@ public class Ventana extends JFrame {
         menu.add(butones, gbc);
         
         //Escuchadores de eventos.
-        botonCrear.addActionListener(new java.awt.event.ActionListener() {
+        botonNuevoCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                CrearVentana();
+                nuevoCurso();
             }
         });
         
         botonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                EliminarVentana();
+
             }
         });
         
         botonEliminarK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                EliminarKVentana();
+                
             }
         });
         
         botonCrearO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                CrearOVentana();
+               
             }
         });
         
@@ -127,9 +142,9 @@ public class Ventana extends JFrame {
         });
     }    
     
-    private void CrearVentana(){
+    private void nuevoCurso(){
         
-        JFrame frame = nuevaVentana(CREAR);
+        JFrame frame = nuevaVentana(NUEVOCURSO);
         
         JPanel menu = new JPanel();
         menu.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -147,22 +162,43 @@ public class Ventana extends JFrame {
         linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
         JPanel linea2 = new JPanel();
         linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
+        JPanel linea3 = new JPanel();
+        linea3.setLayout(new BoxLayout(linea3, BoxLayout.X_AXIS));
+        JPanel linea4 = new JPanel();
+        linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
+        JPanel linea5 = new JPanel();
         
         //Campo de texto para Nombre de la cuenta y label de este.
-        JLabel infoInfo = new JLabel("Info:");
-        JTextField info = new JTextField();
-        linea1.add(infoInfo);
-        linea1.add(info);
+        JLabel infoCodigo = new JLabel("Codigo:");
+        JTextField codigo = new JTextField();
+        linea1.add(infoCodigo);
+        linea1.add(codigo);
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoNombre = new JLabel("Nombre:");
+        JTextField nombre = new JTextField();
+        linea2.add(infoNombre);
+        linea2.add(nombre);
+        
+        //Select para el tipo de curso.
+        JLabel infotipoCurso = new JLabel("Tipo:");
+        JComboBox tipoCurso = new JComboBox();
+        tipoCurso.addItem("FP");
+        tipoCurso.addItem("Bachiller");
+        linea3.add(infotipoCurso);
+        linea3.add(tipoCurso);
         
         //Botones.
         JButton botonAceptar = new JButton();
         botonAceptar.setText("Aceptar");
-        linea2.add(botonAceptar);
-        linea2.add(botonRetroceder(frame));
+        linea4.add(botonAceptar);
+        linea4.add(botonRetroceder(frame));
         
         //Adición de componentes a la pantalla.
         entrada.add(linea1, gbc);
         entrada.add(linea2, gbc);
+        entrada.add(linea3, gbc);
+        entrada.add(linea4, gbc);
         
         gbc.weighty = 1;
         menu.add(entrada, gbc);
@@ -172,64 +208,16 @@ public class Ventana extends JFrame {
         //Escuchadores de eventos.
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) { 
-
+                String tipo = nuevoCurso2();
             }
-        });     
+        }); 
+        
+
     }
     
-    private void EliminarVentana(){
+    private String nuevoCurso2(){
         
-        JFrame frame = nuevaVentana(ELIMINAR);
-        
-        JPanel menu = new JPanel();
-        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
-        menu.setLayout(new GridBagLayout());
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        JPanel entrada = new JPanel(new GridBagLayout());
-        
-        JPanel linea1 = new JPanel();
-        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
-        JPanel linea2 = new JPanel();
-        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
-        
-        //Campo de texto para Nombre de la cuenta y label de este.
-        JLabel infoInfo = new JLabel("Info:");
-        JTextField info = new JTextField();
-        linea1.add(infoInfo);
-        linea1.add(info);
-        
-        //Botones.
-        JButton botonAceptar = new JButton();
-        botonAceptar.setText("Aceptar");
-        linea2.add(botonAceptar);
-        linea2.add(botonRetroceder(frame));
-        
-        //Adición de componentes a la pantalla.
-        entrada.add(linea1, gbc);
-        entrada.add(linea2, gbc);
-        
-        gbc.weighty = 1;
-        menu.add(entrada, gbc);
-        frame.add(menu);
-        frame.pack();
-        
-        //Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) { 
-
-            }
-        });     
-    }
-    
-    private void EliminarKVentana(){
-        
-        JFrame frame = nuevaVentana(ELIMINARK);
+        JFrame frame = nuevaVentana(NUEVOCURSO);
         
         JPanel menu = new JPanel();
         menu.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -247,22 +235,31 @@ public class Ventana extends JFrame {
         linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
         JPanel linea2 = new JPanel();
         linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
+        JPanel linea3 = new JPanel();
+        linea3.setLayout(new BoxLayout(linea3, BoxLayout.X_AXIS));
+        JPanel linea4 = new JPanel();
+        linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
+        JPanel linea5 = new JPanel();
         
-        //Campo de texto para Nombre de la cuenta y label de este.
-        JLabel infoPuntero = new JLabel("Puntero:");
-        JTextField puntero = new JTextField();
-        linea1.add(infoPuntero);
-        linea1.add(puntero);
+        //Select para el tipo de curso.
+        JLabel infotipoCurso = new JLabel("Tipo:");
+        JComboBox tipoCurso = new JComboBox();
+        tipoCurso.addItem("FP");
+        tipoCurso.addItem("Bachiller");
+        linea3.add(infotipoCurso);
+        linea3.add(tipoCurso);
         
         //Botones.
         JButton botonAceptar = new JButton();
         botonAceptar.setText("Aceptar");
-        linea2.add(botonAceptar);
-        linea2.add(botonRetroceder(frame));
+        linea4.add(botonAceptar);
+        linea4.add(botonRetroceder(frame));
         
         //Adición de componentes a la pantalla.
         entrada.add(linea1, gbc);
         entrada.add(linea2, gbc);
+        entrada.add(linea3, gbc);
+        entrada.add(linea4, gbc);
         
         gbc.weighty = 1;
         menu.add(entrada, gbc);
@@ -272,60 +269,12 @@ public class Ventana extends JFrame {
         //Escuchadores de eventos.
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) { 
-
+                return String
             }
-        });     
+        });   
+        
     }
-    
-    private void CrearOVentana(){
-        
-        JFrame frame = nuevaVentana(CREARO);
-        
-        JPanel menu = new JPanel();
-        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
-        menu.setLayout(new GridBagLayout());
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        JPanel entrada = new JPanel(new GridBagLayout());
-        
-        JPanel linea1 = new JPanel();
-        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
-        JPanel linea2 = new JPanel();
-        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
-        
-        //Campo de texto para Nombre de la cuenta y label de este.
-        JLabel infoInfo = new JLabel("Info:");
-        JTextField info = new JTextField();
-        linea1.add(infoInfo);
-        linea1.add(info);
-        
-        //Botones.
-        JButton botonAceptar = new JButton();
-        botonAceptar.setText("Aceptar");
-        linea2.add(botonAceptar);
-        linea2.add(botonRetroceder(frame));
-        
-        //Adición de componentes a la pantalla.
-        entrada.add(linea1, gbc);
-        entrada.add(linea2, gbc);
-        
-        gbc.weighty = 1;
-        menu.add(entrada, gbc);
-        frame.add(menu);
-        frame.pack();
-        
-        //Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) { 
-
-            }
-        });     
-    }
     
     public void Popup(JFrame f, String mensaje){
         JOptionPane.showMessageDialog(f, mensaje);
