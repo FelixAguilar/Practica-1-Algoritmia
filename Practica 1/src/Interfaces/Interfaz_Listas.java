@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Interfaces;
 
 /**
- *
- * @author felix
+ * Interfaz para los metodos de gestion de las listas.
+ * 
+ * @author Felix Aguilar Ferrer, Adrian Bennassar Polzin, Alvaro Bueno Lopez
  */
-public interface Interfaz_Listas {
-    
+public interface Interfaz_Listas <T> {
+    public void añadir (T object);
+    public void eliminar (int index);
+    public void ordenarAlfabeticamente();
 }
