@@ -11,4 +11,8 @@ package Interfaces;
  */
 public interface interfaz_Conceptos {
     
+   @Override
+   public String toString();
+    
+    
 }
