@@ -5,10 +5,34 @@
  */
 package Objects;
 
+import Lists.Lista_Estudiantes;
+
 /**
  *
  * @author felix
  */
-public class Obligatoria {
+public class Obligatoria extends Asignatura{
+    // ATRIBUTOS
+    private int creditos;
+    
+    // CONSTRUCTOR
+    public Obligatoria(int codigo, String nombre, Lista_Estudiantes estudiantes, Asignatura siguiente, int creditos) {
+        super(codigo, nombre, estudiantes, siguiente);
+        this.creditos = creditos;
+    }
+
+    // MÉTODOS
+    public int getCreditos() {
+        return creditos;
+    }
+
+    public void setCreditos(int creditos) {
+        this.creditos = creditos;
+    }
+    
+    @Override
+    public String toString(){
+        return "créditos: " + creditos + ".";
+    }
     
 }

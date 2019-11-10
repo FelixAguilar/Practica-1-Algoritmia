@@ -5,10 +5,34 @@
  */
 package Objects;
 
+import Lists.Lista_Estudiantes;
+
 /**
  *
  * @author felix
  */
-public class Optativa {
+public class Optativa extends Asignatura{
+    // ATRIBUTOS
+    private String perfil;
+    
+    // CONSTRUCTOR
+    public Optativa(int codigo, String nombre, Lista_Estudiantes estudiantes, Asignatura siguiente, String perfil) {
+        super(codigo, nombre, estudiantes, siguiente);
+        this.perfil = perfil;
+    }
+
+    // MÉTODOS
+    public String getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
+    }
+    
+    @Override
+    public String toString(){
+        return "perfil: " + perfil + ".";
+    }
     
 }
