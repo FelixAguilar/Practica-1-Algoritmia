@@ -1,5 +1,6 @@
 package Main;
 
+import Objects.Curso;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BoxLayout;
@@ -131,7 +132,7 @@ public class Ventana extends JFrame {
         
         botonMostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-
+                mostrarCurso();
             }
         });
         
@@ -209,19 +210,20 @@ public class Ventana extends JFrame {
         //Escuchadores de eventos.
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) { 
+               
                 if(tipoCurso.getSelectedItem() == "FP"){
-                    String especialidad = ventanaFP();
+                    ventanaFP(Integer.parseInt(codigo.getText()),nombre.getText(),tipoCurso.getSelectedItem().toString());
                 }else if(tipoCurso.getSelectedItem() == "Bachiller"){
-                    String cursoBachiller = ventanaBachiller();
+                    ventanaBachiller(Integer.parseInt(codigo.getText()),nombre.getText(),tipoCurso.getSelectedItem().toString());
                 }
-              
+                
             }
         }); 
         
 
     }
     
-     private String ventanaFP(){
+    private void ventanaFP(int codigo, String nombre, String tipo){
         
         JFrame frame = nuevaVentana(NUEVOCURSO);
         
@@ -276,16 +278,16 @@ public class Ventana extends JFrame {
         //Escuchadores de eventos.
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) { 
-               String añadirAsignaturas = añadirAsignatura();
-               
-              // nuevoCurso2();
+               Curso curso = o.nuevo_Curso(codigo, nombre, tipo, tipoFP.getSelectedItem().toString());
+               añadirAsignatura(curso); 
+               frame.dispose();
+               // nuevoCurso2();
             }
         });   
-        return null;
-        
+             
     }
      
-    private String ventanaBachiller(){
+    private void ventanaBachiller(int codigo, String nombre, String tipo){
         
         JFrame frame = nuevaVentana(NUEVOCURSO);
         
@@ -339,15 +341,17 @@ public class Ventana extends JFrame {
         //Escuchadores de eventos.
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) { 
-               String añadirAsignaturas = añadirAsignatura();
+               Curso curso = o.nuevo_Curso(codigo, nombre, tipo, tipoBachiller.getSelectedItem().toString());
+               añadirAsignatura(curso);                                                                  
+               frame.dispose();
               // nuevoCurso2();
             }
         });   
-        return null;
+        
         
     }
     
-    private String añadirAsignatura(){
+    private void añadirAsignatura(Curso curso){
         
         JFrame frame = nuevaVentana(NUEVOCURSO);
         
@@ -414,18 +418,18 @@ public class Ventana extends JFrame {
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) { 
                 if(tipoAsignatura.getSelectedItem() == "Obligatoria"){
-                    String creditos = ventanaCreditos();
+                    ventanaCreditos(curso, Integer.parseInt(codigo.getText()), nombre.getText(), tipoAsignatura.getSelectedItem().toString());
                 }else if(tipoAsignatura.getSelectedItem() == "Optativa"){
-                    String perfil = ventanaPerfil();
+                    ventanaPerfil(curso, Integer.parseInt(codigo.getText()), nombre.getText(), tipoAsignatura.getSelectedItem().toString());
                 }
               
             }
         });   
-        return null;
+       
         
     }
     
-     private String ventanaCreditos(){
+    private void ventanaCreditos(Curso curso, int codigo, String nombre, String tipo){
         
         JFrame frame = nuevaVentana(NUEVOCURSO);
         
@@ -452,10 +456,10 @@ public class Ventana extends JFrame {
         JPanel linea5 = new JPanel();
         
         //Campo de texto para Nombre de la cuenta y label de este.
-        JLabel infoCréditos = new JLabel("Créditos:");
-        JTextField créditos = new JTextField();
-        linea1.add(infoCréditos);
-        linea1.add(créditos);
+        JLabel infoCreditos = new JLabel("Créditos:");
+        JTextField creditos = new JTextField();
+        linea1.add(infoCreditos);
+        linea1.add(creditos);
       
         //Botones.
         JButton botonAceptar = new JButton();
@@ -477,16 +481,16 @@ public class Ventana extends JFrame {
         //Escuchadores de eventos.
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) { 
-               
+               o.nueva_Asignatura(curso, codigo, nombre, tipo, creditos.getText());
                frame.dispose();
                //nuevoCurso2();
             }
         });   
-        return null;
+      
         
     }
      
-    private String ventanaPerfil(){
+    private void ventanaPerfil(Curso curso, int codigo, String nombre, String tipo){
         
         JFrame frame = nuevaVentana(NUEVOCURSO);
         
@@ -512,11 +516,12 @@ public class Ventana extends JFrame {
         linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
         JPanel linea5 = new JPanel();
         
-        //Campo de texto para Nombre de la cuenta y label de este.
-        JLabel infoPerfil = new JLabel("Perfil:");
-        JTextField perfil = new JTextField();
-        linea1.add(infoPerfil);
-        linea1.add(perfil);
+        JLabel infoTipoOptativa = new JLabel("Tipo:");
+        JComboBox tipoOptativa = new JComboBox();
+        tipoOptativa .addItem("Teórica");
+        tipoOptativa .addItem("Práctica");
+        linea3.add(infoTipoOptativa);
+        linea3.add(tipoOptativa);
       
         //Botones.
         JButton botonAceptar = new JButton();
@@ -538,11 +543,68 @@ public class Ventana extends JFrame {
         //Escuchadores de eventos.
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) { 
+               o.nueva_Asignatura(curso, codigo, nombre, tipo, tipoOptativa.getSelectedItem().toString());
                frame.dispose();
                //nuevoCurso2();
             }
         });   
-        return null;
+        
+        
+    }
+    
+    private void mostrarCurso(){
+        
+        JFrame frame = nuevaVentana(NUEVOCURSO);
+        
+        JPanel menu = new JPanel();
+        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
+        menu.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JPanel entrada = new JPanel(new GridBagLayout());
+        
+        JPanel linea1 = new JPanel();
+        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
+        JPanel linea2 = new JPanel();
+        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
+        
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoCodigo = new JLabel("Codigo:");
+        JTextField codigo = new JTextField();
+        linea1.add(infoCodigo);
+        linea1.add(codigo);
+        
+        //Botones.
+        JButton botonAceptar = new JButton();
+        botonAceptar.setText("Aceptar");
+        linea2.add(botonAceptar);
+        linea2.add(botonRetroceder(frame));
+        
+        //Adición de componentes a la pantalla.
+        entrada.add(linea1, gbc);
+        entrada.add(linea2, gbc);
+ 
+        gbc.weighty = 1;
+        menu.add(entrada, gbc);
+        frame.add(menu);
+        frame.pack();
+        
+        //Escuchadores de eventos.
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+               o.mostrar_Curso(Integer.parseInt(codigo.getText()));
+               Popup(frame,o.mostrar_Curso(Integer.parseInt(codigo.getText())));
+               frame.dispose();
+              
+            }
+        });   
+       
         
     }
     /*
