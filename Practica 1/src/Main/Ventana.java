@@ -189,6 +189,74 @@ public class Ventana extends JFrame {
         linea3.add(tipoCurso);
         
         //Botones.
+
+        JButton botonAceptar = new JButton();
+        botonAceptar.setText("Aceptar");
+        linea4.add(botonAceptar);
+        
+        linea4.add(botonRetroceder(frame));
+        //Adición de componentes a la pantalla.
+        entrada.add(linea1, gbc);
+        entrada.add(linea2, gbc);
+        entrada.add(linea3, gbc);
+        entrada.add(linea4, gbc);
+        
+        gbc.weighty = 1;
+        menu.add(entrada, gbc);
+        frame.add(menu);
+        frame.pack();
+        
+        //Escuchadores de eventos.
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) { 
+                if(tipoCurso.getSelectedItem() == "FP"){
+                    String especialidad = ventanaFP();
+                }else if(tipoCurso.getSelectedItem() == "Bachiller"){
+                    String cursoBachiller = ventanaBachiller();
+                }
+              
+            }
+        }); 
+        
+
+    }
+    
+     private String ventanaFP(){
+        
+        JFrame frame = nuevaVentana(NUEVOCURSO);
+        
+        JPanel menu = new JPanel();
+        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
+        menu.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JPanel entrada = new JPanel(new GridBagLayout());
+        
+        JPanel linea1 = new JPanel();
+        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
+        JPanel linea2 = new JPanel();
+        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
+        JPanel linea3 = new JPanel();
+        linea3.setLayout(new BoxLayout(linea3, BoxLayout.X_AXIS));
+        JPanel linea4 = new JPanel();
+        linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
+        JPanel linea5 = new JPanel();
+       
+        //Select para el tipo de curso.
+        JLabel infoTipoFP = new JLabel("Tipo:");
+        JComboBox tipoFP = new JComboBox();
+        tipoFP.addItem("Informática");
+        tipoFP.addItem("Mecánica");
+        tipoFP.addItem("Electrónica");
+        linea3.add(infoTipoFP);
+        linea3.add(tipoFP);
+        
+        //Botones.
         JButton botonAceptar = new JButton();
         botonAceptar.setText("Aceptar");
         linea4.add(botonAceptar);
@@ -208,14 +276,78 @@ public class Ventana extends JFrame {
         //Escuchadores de eventos.
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) { 
-                nuevoCurso2();
+               String añadirAsignaturas = añadirAsignatura();
+               
+              // nuevoCurso2();
             }
-        }); 
+        });   
+        return null;
         
+    }
+     
+    private String ventanaBachiller(){
+        
+        JFrame frame = nuevaVentana(NUEVOCURSO);
+        
+        JPanel menu = new JPanel();
+        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
+        menu.setLayout(new GridBagLayout());
 
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JPanel entrada = new JPanel(new GridBagLayout());
+        
+        JPanel linea1 = new JPanel();
+        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
+        JPanel linea2 = new JPanel();
+        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
+        JPanel linea3 = new JPanel();
+        linea3.setLayout(new BoxLayout(linea3, BoxLayout.X_AXIS));
+        JPanel linea4 = new JPanel();
+        linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
+        JPanel linea5 = new JPanel();
+       
+        //Select para el tipo de curso.
+        JLabel infoTipoBachiller = new JLabel("Tipo:");
+        JComboBox tipoBachiller = new JComboBox();
+        tipoBachiller.addItem("Primero");
+        tipoBachiller.addItem("Segundo");
+        linea3.add(infoTipoBachiller);
+        linea3.add(tipoBachiller);
+        
+        //Botones.
+        JButton botonAceptar = new JButton();
+        botonAceptar.setText("Aceptar");
+        linea4.add(botonAceptar);
+        linea4.add(botonRetroceder(frame));
+        
+        //Adición de componentes a la pantalla.
+        entrada.add(linea1, gbc);
+        entrada.add(linea2, gbc);
+        entrada.add(linea3, gbc);
+        entrada.add(linea4, gbc);
+        
+        gbc.weighty = 1;
+        menu.add(entrada, gbc);
+        frame.add(menu);
+        frame.pack();
+        
+        //Escuchadores de eventos.
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) { 
+               String añadirAsignaturas = añadirAsignatura();
+              // nuevoCurso2();
+            }
+        });   
+        return null;
+        
     }
     
-    private void nuevoCurso2(){
+    private String añadirAsignatura(){
         
         JFrame frame = nuevaVentana(NUEVOCURSO);
         
@@ -241,13 +373,25 @@ public class Ventana extends JFrame {
         linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
         JPanel linea5 = new JPanel();
         
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoCodigo = new JLabel("Codigo:");
+        JTextField codigo = new JTextField();
+        linea1.add(infoCodigo);
+        linea1.add(codigo);
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoNombre = new JLabel("Nombre:");
+        JTextField nombre = new JTextField();
+        linea2.add(infoNombre);
+        linea2.add(nombre);
+        
         //Select para el tipo de curso.
-        JLabel infotipoCurso = new JLabel("Tipo:");
-        JComboBox tipoCurso = new JComboBox();
-        tipoCurso.addItem("FP");
-        tipoCurso.addItem("Bachiller");
-        linea3.add(infotipoCurso);
-        linea3.add(tipoCurso);
+        JLabel infoTipoAsignatura = new JLabel("Tipo:");
+        JComboBox tipoAsignatura = new JComboBox();
+        tipoAsignatura.addItem("Obligatoria");
+        tipoAsignatura.addItem("Optativa");
+        linea3.add(infoTipoAsignatura);
+        linea3.add(tipoAsignatura);
         
         //Botones.
         JButton botonAceptar = new JButton();
@@ -269,12 +413,213 @@ public class Ventana extends JFrame {
         //Escuchadores de eventos.
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) { 
-                
+                if(tipoAsignatura.getSelectedItem() == "Obligatoria"){
+                    String creditos = ventanaCreditos();
+                }else if(tipoAsignatura.getSelectedItem() == "Optativa"){
+                    String perfil = ventanaPerfil();
+                }
+              
             }
         });   
+        return null;
         
     }
+    
+     private String ventanaCreditos(){
+        
+        JFrame frame = nuevaVentana(NUEVOCURSO);
+        
+        JPanel menu = new JPanel();
+        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
+        menu.setLayout(new GridBagLayout());
 
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JPanel entrada = new JPanel(new GridBagLayout());
+        
+        JPanel linea1 = new JPanel();
+        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
+        JPanel linea2 = new JPanel();
+        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
+        JPanel linea3 = new JPanel();
+        linea3.setLayout(new BoxLayout(linea3, BoxLayout.X_AXIS));
+        JPanel linea4 = new JPanel();
+        linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
+        JPanel linea5 = new JPanel();
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoCréditos = new JLabel("Créditos:");
+        JTextField créditos = new JTextField();
+        linea1.add(infoCréditos);
+        linea1.add(créditos);
+      
+        //Botones.
+        JButton botonAceptar = new JButton();
+        botonAceptar.setText("Aceptar");
+        linea4.add(botonAceptar);
+        linea4.add(botonRetroceder(frame));
+        
+        //Adición de componentes a la pantalla.
+        entrada.add(linea1, gbc);
+        entrada.add(linea2, gbc);
+        entrada.add(linea3, gbc);
+        entrada.add(linea4, gbc);
+        
+        gbc.weighty = 1;
+        menu.add(entrada, gbc);
+        frame.add(menu);
+        frame.pack();
+        
+        //Escuchadores de eventos.
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) { 
+               
+               frame.dispose();
+               //nuevoCurso2();
+            }
+        });   
+        return null;
+        
+    }
+     
+    private String ventanaPerfil(){
+        
+        JFrame frame = nuevaVentana(NUEVOCURSO);
+        
+        JPanel menu = new JPanel();
+        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
+        menu.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JPanel entrada = new JPanel(new GridBagLayout());
+        
+        JPanel linea1 = new JPanel();
+        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
+        JPanel linea2 = new JPanel();
+        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
+        JPanel linea3 = new JPanel();
+        linea3.setLayout(new BoxLayout(linea3, BoxLayout.X_AXIS));
+        JPanel linea4 = new JPanel();
+        linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
+        JPanel linea5 = new JPanel();
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoPerfil = new JLabel("Perfil:");
+        JTextField perfil = new JTextField();
+        linea1.add(infoPerfil);
+        linea1.add(perfil);
+      
+        //Botones.
+        JButton botonAceptar = new JButton();
+        botonAceptar.setText("Aceptar");
+        linea4.add(botonAceptar);
+        linea4.add(botonRetroceder(frame));
+        
+        //Adición de componentes a la pantalla.
+        entrada.add(linea1, gbc);
+        entrada.add(linea2, gbc);
+        entrada.add(linea3, gbc);
+        entrada.add(linea4, gbc);
+        
+        gbc.weighty = 1;
+        menu.add(entrada, gbc);
+        frame.add(menu);
+        frame.pack();
+        
+        //Escuchadores de eventos.
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) { 
+               frame.dispose();
+               //nuevoCurso2();
+            }
+        });   
+        return null;
+        
+    }
+    /*
+    private String nuevoCurso2(){
+        
+        JFrame frame = nuevaVentana(NUEVOCURSO);
+        
+        JPanel menu = new JPanel();
+        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
+        menu.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JPanel entrada = new JPanel(new GridBagLayout());
+        
+        JPanel linea1 = new JPanel();
+        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
+        JPanel linea2 = new JPanel();
+        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
+        JPanel linea3 = new JPanel();
+        linea3.setLayout(new BoxLayout(linea3, BoxLayout.X_AXIS));
+        JPanel linea4 = new JPanel();
+        linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
+        JPanel linea5 = new JPanel();
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoCodigo = new JLabel("Codigo:");
+        JTextField codigo = new JTextField();
+        linea1.add(infoCodigo);
+        linea1.add(codigo);
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoNombre = new JLabel("Nombre:");
+        JTextField nombre = new JTextField();
+        linea2.add(infoNombre);
+        linea2.add(nombre);
+        
+        //Select para el tipo de curso.
+        JLabel infoTipoAsignatura = new JLabel("Tipo:");
+        JComboBox tipoAsignatura = new JComboBox();
+        tipoAsignatura.addItem("Obligatoria");
+        tipoAsignatura.addItem("Optativa");
+        linea3.add(infoTipoAsignatura);
+        linea3.add(tipoAsignatura);
+        
+        //Botones.
+        JButton botonAceptar = new JButton();
+        botonAceptar.setText("Aceptar");
+        linea4.add(botonAceptar);
+        linea4.add(botonRetroceder(frame));
+        
+        //Adición de componentes a la pantalla.
+        entrada.add(linea1, gbc);
+        entrada.add(linea2, gbc);
+        entrada.add(linea3, gbc);
+        entrada.add(linea4, gbc);
+        
+        gbc.weighty = 1;
+        menu.add(entrada, gbc);
+        frame.add(menu);
+        frame.pack();
+        
+        //Escuchadores de eventos.
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) { 
+               frame.dispose();
+               nuevoCurso2();
+            }
+        });   
+        return null;
+        
+    }
+   */
     
     public void Popup(JFrame f, String mensaje){
         JOptionPane.showMessageDialog(f, mensaje);
