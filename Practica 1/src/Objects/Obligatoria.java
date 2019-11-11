@@ -5,8 +5,6 @@
  */
 package Objects;
 
-import Lists.Lista_Estudiantes;
-
 /**
  *
  * @author felix
@@ -16,8 +14,8 @@ public class Obligatoria extends Asignatura{
     private int creditos;
     
     // CONSTRUCTOR
-    public Obligatoria(int codigo, String nombre, Lista_Estudiantes estudiantes, Asignatura siguiente, int creditos) {
-        super(codigo, nombre, estudiantes, siguiente);
+    public Obligatoria(int codigo, String nombre, int creditos) {
+        super(codigo, nombre);
         this.creditos = creditos;
     }
 
@@ -32,7 +30,7 @@ public class Obligatoria extends Asignatura{
     
     @Override
     public String toString(){
-        return "créditos: " + creditos + ".";
+        return "Codigo: " + this.getCodigo() + ", Nombre:" + this.getNombre() + ", Tipo: Obligatoria, Creditos: " + creditos + ".\n";
     }
     
 }

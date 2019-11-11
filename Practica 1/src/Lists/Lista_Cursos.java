@@ -99,7 +99,22 @@ public class Lista_Cursos implements Interfaz_Listas<Curso> {
      */
     @Override
     public void ordenarAlfabeticamente() {
+        // No implementada para esta clase.
+    }
+    
+    public Curso buscar(int codigo){
         
+        // Creamos un puntero auxiliar que apunte al primer elemento.
+        Curso elemento;
+        elemento = this.curso;
+        
+        // Se realiza un recorrido hasta encontrar el campo info identico.
+        while(elemento.getCodigo()!= codigo){
+            elemento = elemento.getSiguiente();
+        }
+        
+        // Se devuelve el puntero.
+        return elemento;
     }
     
 }

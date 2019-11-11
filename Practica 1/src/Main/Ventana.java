@@ -208,14 +208,14 @@ public class Ventana extends JFrame {
         //Escuchadores de eventos.
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) { 
-                String tipo = nuevoCurso2();
+                nuevoCurso2();
             }
         }); 
         
 
     }
     
-    private String nuevoCurso2(){
+    private void nuevoCurso2(){
         
         JFrame frame = nuevaVentana(NUEVOCURSO);
         
@@ -269,7 +269,7 @@ public class Ventana extends JFrame {
         //Escuchadores de eventos.
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) { 
-                return String
+                
             }
         });   
         

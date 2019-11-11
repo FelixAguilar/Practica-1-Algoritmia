@@ -20,11 +20,11 @@ public class Curso implements interfaz_Conceptos{
     private Curso siguiente;
 
     // CONSTRUCTOR
-    public Curso(int codigo, String nombre, Lista_Asignaturas asignaturas, Curso siguiente) {
+    public Curso(int codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.asignaturas = asignaturas;
-        this.siguiente = siguiente;
+        this.asignaturas = new Lista_Asignaturas();
+        this.siguiente = null;
     }
 
     

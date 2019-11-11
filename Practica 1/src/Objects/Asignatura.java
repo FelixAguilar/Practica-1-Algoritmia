@@ -6,7 +6,7 @@
 package Objects;
 
 import Interfaces.interfaz_Conceptos;
-import Lists.Lista_Estudiantes;
+import Lists.Lista_Ref_Estudiantes;
 
 /**
  *
@@ -16,15 +16,15 @@ public class Asignatura implements interfaz_Conceptos{
     // ATRIBUTOS
     private int codigo;
     private String nombre;
-    private Lista_Estudiantes estudiantes;
+    private Lista_Ref_Estudiantes estudiantes;
     private Asignatura siguiente;
 
     // CONSTRUCTOR
-    public Asignatura(int codigo, String nombre, Lista_Estudiantes estudiantes, Asignatura siguiente) {
+    public Asignatura(int codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
-        this.estudiantes = estudiantes;
-        this.siguiente = siguiente;
+        this.estudiantes = new Lista_Ref_Estudiantes();
+        this.siguiente = null;
     }
 
     // MÉTODOS
@@ -44,11 +44,11 @@ public class Asignatura implements interfaz_Conceptos{
         this.nombre = nombre;
     }
 
-    public Lista_Estudiantes getEstudiantes() {
+    public Lista_Ref_Estudiantes getEstudiantes() {
         return estudiantes;
     }
 
-    public void setEstudiantes(Lista_Estudiantes estudiantes) {
+    public void setEstudiantes(Lista_Ref_Estudiantes estudiantes) {
         this.estudiantes = estudiantes;
     }
 
@@ -62,8 +62,7 @@ public class Asignatura implements interfaz_Conceptos{
     
     @Override
     public String toString(){
-        return "código: " + codigo + ", nombre: " + nombre + ", estudiantes: " + estudiantes
-        + ", siguiente: " + siguiente + ".";
+        return "";
     }
     
 }

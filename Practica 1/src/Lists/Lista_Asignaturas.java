@@ -100,6 +100,58 @@ public class Lista_Asignaturas implements Interfaz_Listas<Asignatura> {
     @Override
     public void ordenarAlfabeticamente() {
         
+        //Preparacion de variables
+        Lista_Asignaturas lista_aux = new Lista_Asignaturas();
+        Asignatura max = this.asignatura;
+        Asignatura aux = this.asignatura;
+        
+        // Comenzamos la ordenacion de maximo al minimo.
+        while(max != null){ 
+            while (aux != null) {
+                int c = max.getNombre().compareTo(aux.getNombre());
+                if (c >= 0) {
+                    aux = aux.getSiguiente();
+                } else {
+                    max = aux;
+                    aux = aux.getSiguiente();
+                }
+            }
+            lista_aux.añadir(max);
+            this.eliminar(buscar_Posicion(max));
+            aux = this.asignatura;
+            max = this.asignatura;
+        }
+        this.asignatura = lista_aux.getAsignatura();
     }
     
+    private int buscar_Posicion(Asignatura asignatura){
+        
+        // Creamos un puntero auxiliar que apunte al primer elemento.
+        Asignatura aux = this.asignatura;
+        int i = 0;
+
+        // Se realiza un recorrido hasta encontrar el campo info identico.
+        while(aux != asignatura && aux != null){
+            aux = aux.getSiguiente();
+            i++;
+        }
+        
+        // Se devuelve el puntero.
+        return i;
+    }
+    
+    public Asignatura buscar(int codigo){
+        
+        // Creamos un puntero auxiliar que apunte al primer elemento.
+        Asignatura elemento;
+        elemento = this.asignatura;
+        
+        // Se realiza un recorrido hasta encontrar el campo info identico.
+        while(elemento.getCodigo()!= codigo){
+            elemento = elemento.getSiguiente();
+        }
+        
+        // Se devuelve el puntero.
+        return elemento;
+    }
 }

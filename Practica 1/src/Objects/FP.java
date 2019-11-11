@@ -5,8 +5,6 @@
  */
 package Objects;
 
-import Lists.Lista_Asignaturas;
-
 /**
  *
  * @author felix
@@ -16,8 +14,8 @@ public class FP extends Curso{
     private String especialidad;
     
     // CONSTRUCTOR
-    public FP(int codigo, String nombre, Lista_Asignaturas asignaturas, Curso siguiente, String especialidad) {
-        super(codigo, nombre, asignaturas, siguiente);
+    public FP(int codigo, String nombre, String especialidad) {
+        super(codigo, nombre);
         this.especialidad = especialidad;
     }
 

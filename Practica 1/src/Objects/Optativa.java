@@ -5,8 +5,6 @@
  */
 package Objects;
 
-import Lists.Lista_Estudiantes;
-
 /**
  *
  * @author felix
@@ -16,8 +14,8 @@ public class Optativa extends Asignatura{
     private String perfil;
     
     // CONSTRUCTOR
-    public Optativa(int codigo, String nombre, Lista_Estudiantes estudiantes, Asignatura siguiente, String perfil) {
-        super(codigo, nombre, estudiantes, siguiente);
+    public Optativa(int codigo, String nombre, String perfil) {
+        super(codigo, nombre);
         this.perfil = perfil;
     }
 
@@ -32,7 +30,7 @@ public class Optativa extends Asignatura{
     
     @Override
     public String toString(){
-        return "perfil: " + perfil + ".";
+        return "Codigo: " + this.getCodigo() + ", Nombre:" + this.getNombre() + ", Tipo: Optativa, Perfil: " + perfil + ".\n";
     }
     
 }
