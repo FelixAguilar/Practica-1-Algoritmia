@@ -95,26 +95,55 @@ public class Lista_Cursos implements Interfaz_Listas<Curso> {
     }
 
     /**
-     * Ordena la lista alfabeticamente segun nombre de la curso.
+     * Devuelve el objeto Curso en la posicion indicada por parametro. Si no
+     * lo encuentra devuelve null.
+     * 
+     * @param index
+     * @return 
      */
     @Override
-    public void ordenarAlfabeticamente() {
-        // No implementada para esta clase.
-    }
-    
-    public Curso buscar(int codigo){
+    public Curso buscarObject(int index) {
         
         // Creamos un puntero auxiliar que apunte al primer elemento.
         Curso elemento;
         elemento = this.curso;
         
         // Se realiza un recorrido hasta encontrar el campo info identico.
-        while(elemento.getCodigo()!= codigo){
+        while(elemento != null && elemento.getCodigo()!= index){
             elemento = elemento.getSiguiente();
         }
         
         // Se devuelve el puntero.
         return elemento;
+    }
+    
+    /**
+     * Devuelve el indice en la lista del elemento introducido por parametro. 
+     * Si no lo encuentra devuelve -1.
+     * 
+     * @param object
+     * @return 
+     */
+    @Override
+    public int buscarIndex(Curso object) {
+        
+        // Creamos un puntero auxiliar que apunte al primer elemento.
+        Curso aux = this.curso;
+        int i = 0;
+
+        // Se realiza un recorrido hasta encontrar el elemento introducido.
+        while(aux != object && aux != null){
+            aux = aux.getSiguiente();
+            i++;
+        }
+        
+        //Si no lo ha encontrado entonces devuelve -1.
+        if(aux == null){
+            i = -1;
+        }
+        
+        // Se devuelve el indice.
+        return i;
     }
     
 }

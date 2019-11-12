@@ -63,8 +63,7 @@ public class Curso implements interfaz_Conceptos{
     
      @Override
     public String toString(){
-        return "código: " + codigo + ", nombre: " + nombre + ", asignaturas: " + asignaturas
-        + ", siguiente: " + siguiente + ".";
+        return "código: " + codigo + ", nombre: " + nombre + ".";
     }
     
 }

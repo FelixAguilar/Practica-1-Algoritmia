@@ -18,9 +18,9 @@ public class Ref_Estudiante implements interfaz_Conceptos{
     private Ref_Estudiante siguiente;
     
     // CONSTRUCTOR
-    public Ref_Estudiante(Estudiante estudiante, Ref_Estudiante siguiente) {
+    public Ref_Estudiante(Estudiante estudiante) {
         this.estudiante = estudiante;
-        this.siguiente = siguiente;
+        this.siguiente = null;
     }
     
     // MÉTODOS

@@ -18,9 +18,9 @@ public class Ref_Asignatura implements interfaz_Conceptos {
     private Ref_Asignatura siguiente;
 
     // CONSTRUCTOR
-    public Ref_Asignatura(Asignatura asignatura, Ref_Asignatura siguiente) {
+    public Ref_Asignatura(Asignatura asignatura) {
         this.asignatura = asignatura;
-        this.siguiente = siguiente;
+        this.siguiente = null;
     }
 
     // MÉTODOS

@@ -30,7 +30,7 @@ public class Optativa extends Asignatura{
     
     @Override
     public String toString(){
-        return "Codigo: " + this.getCodigo() + ", Nombre:" + this.getNombre() + ", Tipo: Optativa, Perfil: " + perfil + ".\n";
+        return "Codigo: " + this.getCodigo() + ", Nombre:" + this.getNombre() + ", Tipo: Optativa, Perfil: " + perfil + ".";
     }
     
 }

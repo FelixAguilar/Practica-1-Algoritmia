@@ -30,7 +30,7 @@ public class FP extends Curso{
     
     @Override
     public String toString(){
-        return "Codigo: " + this.getCodigo() + ", Nombre:" + this.getNombre() + ", Tipo: FP, Especialidad: " + especialidad + ".\n";
+        return "Codigo: " + this.getCodigo() + ", Nombre:" + this.getNombre() + ", Tipo: FP, Especialidad: " + especialidad + ".";
     }
     
     

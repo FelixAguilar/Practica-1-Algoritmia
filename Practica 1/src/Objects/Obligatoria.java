@@ -30,7 +30,7 @@ public class Obligatoria extends Asignatura{
     
     @Override
     public String toString(){
-        return "Codigo: " + this.getCodigo() + ", Nombre:" + this.getNombre() + ", Tipo: Obligatoria, Creditos: " + creditos + ".\n";
+        return "Codigo: " + this.getCodigo() + ", Nombre:" + this.getNombre() + ", Tipo: Obligatoria, Creditos: " + creditos + ".";
     }
     
 }

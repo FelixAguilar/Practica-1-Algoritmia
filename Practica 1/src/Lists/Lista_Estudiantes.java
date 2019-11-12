@@ -46,22 +46,27 @@ public class Lista_Estudiantes implements Interfaz_Listas<Estudiante> {
      */
     @Override
     public void añadir(Estudiante object) {
-        
-        // Si la lista no esta vacia.
-        if (this.estudiante != null){
+
+        // Se comprueba que no este vacia la lista o que sea mayor que el primer elemento.
+        if (this.estudiante != null && object.getNombre().compareTo(this.estudiante.getNombre()) <= 0){
             
-            // Se recorre hasta llegar al final y se introduce el elemento alli.
+            // Se realiza un recorrido de los elementos de la lista hasta encontrar 
+            // un elemento mayor que el que se quiere introducir.
             Estudiante estudiante = this.estudiante;
-            while (estudiante.getSiguiente() != null){
+            while(estudiante.getSiguiente() != null && object.getNombre().compareTo(estudiante.getNombre()) <= 0){
                 estudiante = estudiante.getSiguiente();
             }
+            
+            // Se introduce el elemento en su posicion.
+            object.setSiguiente(estudiante.getSiguiente());
             estudiante.setSiguiente(object);
         } else {
             
-            // Si no se introduce en el this.estudiante sitio.
+            // Se introduce el elemento en el primer sitio de la lista.
+            object.setSiguiente(this.estudiante);
             this.estudiante = object;
-        }
-        object.setSiguiente(null);
+        } 
+        
     }
 
     /**
@@ -94,12 +99,56 @@ public class Lista_Estudiantes implements Interfaz_Listas<Estudiante> {
         }
     }
 
-    /**
-     * Ordena la lista alfabeticamente segun nombre de la estudiante.
+        /**
+     * Devuelve el objeto Estudiante en la posicion indicada por parametro. Si no
+     * lo encuentra devuelve null.
+     * 
+     * @param index
+     * @return 
      */
     @Override
-    public void ordenarAlfabeticamente() {
+    public Estudiante buscarObject(int index) {
         
+        // Creamos un puntero auxiliar que apunte al primer elemento.
+        Estudiante elemento;
+        elemento = this.estudiante;
+        
+        // Se realiza un recorrido hasta encontrar el campo info identico.
+        while(elemento != null && elemento.getDni()!= index){
+            elemento = elemento.getSiguiente();
+        }
+        
+        // Se devuelve el puntero.
+        return elemento;
+    }
+    
+    /**
+     * Devuelve el indice en la lista del elemento introducido por parametro. 
+     * Si no lo encuentra devuelve -1.
+     * 
+     * @param object
+     * @return 
+     */
+    @Override
+    public int buscarIndex(Estudiante object) {
+        
+        // Creamos un puntero auxiliar que apunte al primer elemento.
+        Estudiante aux = this.estudiante;
+        int i = 0;
+
+        // Se realiza un recorrido hasta encontrar el elemento introducido.
+        while(aux != object && aux != null){
+            aux = aux.getSiguiente();
+            i++;
+        }
+        
+        //Si no lo ha encontrado entonces devuelve -1.
+        if(aux == null){
+            i = -1;
+        }
+        
+        // Se devuelve el indice.
+        return i;
     }
     
 }

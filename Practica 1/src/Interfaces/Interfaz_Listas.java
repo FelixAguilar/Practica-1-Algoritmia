@@ -8,5 +8,6 @@ package Interfaces;
 public interface Interfaz_Listas <T> {
     public void añadir (T object);
     public void eliminar (int index);
-    public void ordenarAlfabeticamente();
+    public T buscarObject(int index);
+    public int buscarIndex(T object);
 }

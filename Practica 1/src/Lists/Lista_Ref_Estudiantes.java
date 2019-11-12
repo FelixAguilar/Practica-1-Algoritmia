@@ -95,11 +95,55 @@ public class Lista_Ref_Estudiantes implements Interfaz_Listas<Ref_Estudiante> {
     }
 
     /**
-     * Ordena la lista alfabeticamente segun nombre de la ref_Estudiante.
+     * Devuelve el objeto Asignatura en la posicion indicada por parametro. Si no
+     * lo encuentra devuelve null.
+     * 
+     * @param index
+     * @return 
      */
     @Override
-    public void ordenarAlfabeticamente() {
+    public Ref_Estudiante buscarObject(int index) {
         
+        // Creamos un puntero auxiliar que apunte al primer elemento.
+        Ref_Estudiante elemento;
+        elemento = this.ref_Estudiante;
+        
+        // Se realiza un recorrido hasta encontrar el campo info identico.
+        while(elemento != null && elemento.getEstudiante().getDni()!= index){
+            elemento = elemento.getSiguiente();
+        }
+        
+        // Se devuelve el puntero.
+        return elemento;
+    }
+    
+    /**
+     * Devuelve el indice en la lista del elemento introducido por parametro. 
+     * Si no lo encuentra devuelve -1.
+     * 
+     * @param object
+     * @return 
+     */
+    @Override
+    public int buscarIndex(Ref_Estudiante object) {
+        
+        // Creamos un puntero auxiliar que apunte al primer elemento.
+        Ref_Estudiante aux = this.ref_Estudiante;
+        int i = 0;
+
+        // Se realiza un recorrido hasta encontrar el elemento introducido.
+        while(aux != object && aux != null){
+            aux = aux.getSiguiente();
+            i++;
+        }
+        
+        //Si no lo ha encontrado entonces devuelve -1.
+        if(aux == null){
+            i = -1;
+        }
+        
+        // Se devuelve el indice.
+        return i;
     }
     
 }
