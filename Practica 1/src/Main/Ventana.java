@@ -1,6 +1,7 @@
 package Main;
 
 import Objects.Curso;
+import Objects.Estudiante;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BoxLayout;
@@ -68,9 +69,9 @@ public class Ventana extends JFrame {
         butones.add(botonNuevoCurso, gbc);
 
         //Boton de buscar por cuenta.
-        JButton botonEliminar = new JButton();
-        botonEliminar.setText(MATRICULAESTUDIANTE);
-        butones.add(botonEliminar, gbc);
+        JButton botonMatriculaEstudiante = new JButton();
+        botonMatriculaEstudiante.setText(MATRICULAESTUDIANTE);
+        butones.add(botonMatriculaEstudiante, gbc);
 
         //Boton de buscar por usuario.
         JButton botonEliminarK = new JButton();
@@ -83,19 +84,19 @@ public class Ventana extends JFrame {
         butones.add(botonCrearO, gbc);
 
         //Boton de extraer dinero de cuenta.
-        JButton botonMostrar = new JButton();
-        botonMostrar.setText(MOSTRARCURSO);
-        butones.add(botonMostrar, gbc);
+        JButton botonMostrarCurso = new JButton();
+        botonMostrarCurso.setText(MOSTRARCURSO);
+        butones.add(botonMostrarCurso, gbc);
         
         //Boton de extraer dinero de cuenta.
-        JButton botonMostrard = new JButton();
-        botonMostrard.setText(MOSTRARASIGNATURA);
-        butones.add(botonMostrard, gbc);
+        JButton botonMostrarAsignatura = new JButton();
+        botonMostrarAsignatura.setText(MOSTRARASIGNATURA);
+        butones.add(botonMostrarAsignatura, gbc);
         
         //Boton de extraer dinero de cuenta.
-        JButton botonMostrardd = new JButton();
-        botonMostrardd.setText(MOSTRARESTUDIANTE);
-        butones.add(botonMostrardd, gbc);
+        JButton botonMostrarEstudiante = new JButton();
+        botonMostrarEstudiante.setText(MOSTRARESTUDIANTE);
+        butones.add(botonMostrarEstudiante, gbc);
 
         //Boton de salir.
         JButton botonSalir= new JButton();
@@ -112,8 +113,9 @@ public class Ventana extends JFrame {
             }
         });
         
-        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
+        botonMatriculaEstudiante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
+                matriculaEstudiante();
 
             }
         });
@@ -130,9 +132,23 @@ public class Ventana extends JFrame {
             }
         });
         
-        botonMostrar.addActionListener(new java.awt.event.ActionListener() {
+        botonMostrarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 mostrarCurso();
+            }
+        });
+        
+        botonMostrarAsignatura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                mostrarAsignatura();
+               
+            }
+        });
+        
+        botonMostrarEstudiante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                mostrarEstudiante();
+               
             }
         });
         
@@ -217,6 +233,87 @@ public class Ventana extends JFrame {
                     ventanaBachiller(Integer.parseInt(codigo.getText()),nombre.getText(),tipoCurso.getSelectedItem().toString());
                 }
                 
+            }
+        }); 
+        
+
+    }
+    
+    private void matriculaEstudiante(){
+        
+        JFrame frame = nuevaVentana(MATRICULAESTUDIANTE);
+        
+        JPanel menu = new JPanel();
+        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
+        menu.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JPanel entrada = new JPanel(new GridBagLayout());
+        
+        JPanel linea1 = new JPanel();
+        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
+        JPanel linea2 = new JPanel();
+        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
+        JPanel linea3 = new JPanel();
+        linea3.setLayout(new BoxLayout(linea3, BoxLayout.X_AXIS));
+        JPanel linea4 = new JPanel();
+        linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
+        JPanel linea5 = new JPanel();
+        linea5.setLayout(new BoxLayout(linea5, BoxLayout.X_AXIS));
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoCodigo = new JLabel("DNI:");
+        JTextField codigo = new JTextField();
+        linea1.add(infoCodigo);
+        linea1.add(codigo);
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoNombre = new JLabel("Nombre:");
+        JTextField nombre = new JTextField();
+        linea2.add(infoNombre);
+        linea2.add(nombre);
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoAsignatura = new JLabel("Asignatura:");
+        JTextField asignatura = new JTextField();
+        linea3.add(infoAsignatura);
+        linea3.add(asignatura);
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoCurso = new JLabel("Curso:");
+        JTextField curso = new JTextField();
+        linea4.add(infoCurso);
+        linea4.add(curso);
+        
+        //Botones.
+
+        JButton botonAceptar = new JButton();
+        botonAceptar.setText("Aceptar");
+        linea5.add(botonAceptar);
+        
+        linea5.add(botonRetroceder(frame));
+        //Adición de componentes a la pantalla.
+        entrada.add(linea1, gbc);
+        entrada.add(linea2, gbc);
+        entrada.add(linea3, gbc);
+        entrada.add(linea4, gbc);
+        entrada.add(linea5, gbc);
+        
+        gbc.weighty = 1;
+        menu.add(entrada, gbc);
+        frame.add(menu);
+        frame.pack();
+        
+        //Escuchadores de eventos.
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                Estudiante estudiante = o.matricular_Estudiante(Integer.parseInt(curso.getText()),Integer.parseInt(asignatura.getText()),Integer.parseInt(codigo.getText()), nombre.getText());
+                frame.dispose();
             }
         }); 
         
@@ -554,7 +651,7 @@ public class Ventana extends JFrame {
     
     private void mostrarCurso(){
         
-        JFrame frame = nuevaVentana(NUEVOCURSO);
+        JFrame frame = nuevaVentana(MOSTRARCURSO);
         
         JPanel menu = new JPanel();
         menu.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -600,6 +697,118 @@ public class Ventana extends JFrame {
             public void actionPerformed(java.awt.event.ActionEvent e) {
                o.mostrar_Curso(Integer.parseInt(codigo.getText()));
                Popup(frame,o.mostrar_Curso(Integer.parseInt(codigo.getText())));
+               frame.dispose();
+              
+            }
+        });   
+       
+        
+    }
+    
+    private void mostrarAsignatura(){
+        
+        JFrame frame = nuevaVentana(MOSTRARASIGNATURA);
+        
+        JPanel menu = new JPanel();
+        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
+        menu.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JPanel entrada = new JPanel(new GridBagLayout());
+        
+        JPanel linea1 = new JPanel();
+        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
+        JPanel linea2 = new JPanel();
+        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
+        
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoCodigo = new JLabel("Codigo:");
+        JTextField codigo = new JTextField();
+        linea1.add(infoCodigo);
+        linea1.add(codigo);
+        
+        //Botones.
+        JButton botonAceptar = new JButton();
+        botonAceptar.setText("Aceptar");
+        linea2.add(botonAceptar);
+        linea2.add(botonRetroceder(frame));
+        
+        //Adición de componentes a la pantalla.
+        entrada.add(linea1, gbc);
+        entrada.add(linea2, gbc);
+ 
+        gbc.weighty = 1;
+        menu.add(entrada, gbc);
+        frame.add(menu);
+        frame.pack();
+        
+        //Escuchadores de eventos.
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+               o.mostrar_Asignatura(Integer.parseInt(codigo.getText()));
+               Popup(frame,o.mostrar_Asignatura(Integer.parseInt(codigo.getText())));
+               frame.dispose();
+              
+            }
+        });   
+       
+        
+    }
+    
+    private void mostrarEstudiante(){
+        
+        JFrame frame = nuevaVentana(MOSTRARESTUDIANTE);
+        
+        JPanel menu = new JPanel();
+        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
+        menu.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JPanel entrada = new JPanel(new GridBagLayout());
+        
+        JPanel linea1 = new JPanel();
+        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
+        JPanel linea2 = new JPanel();
+        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
+        
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoDni = new JLabel("DNI:");
+        JTextField dni = new JTextField();
+        linea1.add(infoDni);
+        linea1.add(dni);
+        
+        //Botones.
+        JButton botonAceptar = new JButton();
+        botonAceptar.setText("Aceptar");
+        linea2.add(botonAceptar);
+        linea2.add(botonRetroceder(frame));
+        
+        //Adición de componentes a la pantalla.
+        entrada.add(linea1, gbc);
+        entrada.add(linea2, gbc);
+ 
+        gbc.weighty = 1;
+        menu.add(entrada, gbc);
+        frame.add(menu);
+        frame.pack();
+        
+        //Escuchadores de eventos.
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+               o.mostrar_Estudiante(Integer.parseInt(dni.getText()));
+               Popup(frame,o.mostrar_Estudiante(Integer.parseInt(dni.getText())));
                frame.dispose();
               
             }
