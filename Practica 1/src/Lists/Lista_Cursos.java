@@ -5,7 +5,7 @@ import Objects.Curso;
 
 /**
  * Clase lista de cursos. Permite gestionar la lista añadiendo, eliminando 
- * o bien ordenado la lista.
+ * o bien modificando la lista.
  * 
  * @author Felix Aguilar Ferrer, Adrian Bennasar Polzin, Alvaro Bueno Lopez.
  */
@@ -14,9 +14,7 @@ public class Lista_Cursos implements Interfaz_Listas<Curso> {
     // Atributo.
     private Curso curso;
     
-    /**
-     * Constructor de la clase.
-     */
+    // Constructor.
     public Lista_Cursos() {
         this.curso = null;
     }
@@ -51,21 +49,24 @@ public class Lista_Cursos implements Interfaz_Listas<Curso> {
         if (this.curso != null){
             
             // Se recorre hasta llegar al final y se introduce el elemento alli.
-            Curso curso = this.curso;
-            while (curso.getSiguiente() != null){
-                curso = curso.getSiguiente();
+            Curso aux = this.curso;
+            while (aux.getSiguiente() != null){
+                aux = aux.getSiguiente();
             }
-            curso.setSiguiente(object);
+            aux.setSiguiente(object);
         } else {
             
-            // Si no se introduce en el this.curso sitio.
+            // Si no se introduce en el inicio de la lista.
             this.curso = object;
         }
+        
+        // Asegura que el elemento introducido al final apunta a null.
         object.setSiguiente(null);
     }
 
     /**
-     * Elimina el elemento en la posicion "index" de la lista.
+     * Elimina el elemento de la lista en la posicion indicada por index 
+     * introducido por parametro.
      * 
      * @param index 
      */
@@ -75,21 +76,33 @@ public class Lista_Cursos implements Interfaz_Listas<Curso> {
         // Si la lista esta vacia no realiza nada.
         if (this.curso != null) {
             
-            //Si el siguiente valor es nulo entonces elimina el this.curso elemento.
+            /* Si el siguiente valor despues del primer elemento es nulo 
+               entonces elimina el primer elemento de la lista. */
             if (this.curso.getSiguiente() == null) {
                 this.curso = null;
             } else {
                 
-                // Si no se realiza un recorrido hasta el elemento index-1.
+                /* Si el index es 1 entonces se elimina el primer elemento de la 
+                   lista, si no se realiza un recorrido hasta encontrar el 
+                   elemento anterior al elemento a eliminar. */
+                if (index > 1){
+                
+                // Recorre la lista en busca del elemento en la posicion index.
                 int n = 0;
-                Curso curso = this.curso;
+                Curso aux = this.curso;
                 while (n < index - 2) {
-                    curso = curso.getSiguiente();
+                    aux = aux.getSiguiente();
                     n++;
                 }
                 
-                // Se elimina el elemento index.
-                curso.setSiguiente(curso.getSiguiente().getSiguiente());
+                // Elimina el elemento en la posicion index.
+                aux.setSiguiente(aux.getSiguiente().getSiguiente());
+                }
+                else{
+                    
+                    // Elimina el elemento en la segunda posicion.
+                    this.curso = this.curso.getSiguiente();
+                }
             }
         }
     }
@@ -105,16 +118,16 @@ public class Lista_Cursos implements Interfaz_Listas<Curso> {
     public Curso buscarObject(int index) {
         
         // Creamos un puntero auxiliar que apunte al primer elemento.
-        Curso elemento;
-        elemento = this.curso;
+        Curso aux;
+        aux = this.curso;
         
-        // Se realiza un recorrido hasta encontrar el campo info identico.
-        while(elemento != null && elemento.getCodigo()!= index){
-            elemento = elemento.getSiguiente();
+        // Se realiza un recorrido hasta encontrar el campo Codigo identico.
+        while(aux != null && aux.getCodigo()!= index){
+            aux = aux.getSiguiente();
         }
         
         // Se devuelve el puntero.
-        return elemento;
+        return aux;
     }
     
     /**

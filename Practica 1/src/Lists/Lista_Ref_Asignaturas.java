@@ -4,8 +4,8 @@ import Interfaces.Interfaz_Listas;
 import References.Ref_Asignatura;
 
 /**
- * Clase lista de ref_Ref_Asignaturas. Permite gestionar la lista añadiendo, eliminando 
- * o bien ordenado la lista.
+ * Clase lista de ref_Asignaturas. Permite gestionar la lista añadiendo, 
+ * eliminando o bien buscando en la lista.
  * 
  * @author Felix Aguilar Ferrer, Adrian Bennasar Polzin, Alvaro Bueno Lopez.
  */
@@ -14,9 +14,7 @@ public class Lista_Ref_Asignaturas implements Interfaz_Listas<Ref_Asignatura> {
     // Atributo.
     private Ref_Asignatura ref_Asignatura;
     
-    /**
-     * Constructor de la clase.
-     */
+    // Constructor.
     public Lista_Ref_Asignaturas() {
         this.ref_Asignatura = null;
     }
@@ -40,32 +38,45 @@ public class Lista_Ref_Asignaturas implements Interfaz_Listas<Ref_Asignatura> {
     } 
 
     /**
-     * Permite añadir un elemento al final de la lista.
+     * Permite añadir un elemento a la lista de forma ordenada por el codigo de 
+     * la asignatura.
      * 
      * @param object 
      */
     @Override
     public void añadir(Ref_Asignatura object) {
         
-        // Si la lista no esta vacia.
-        if (this.ref_Asignatura != null){
+        /* Comprueba que la lista no este vacia y que sea mayor el elemento 
+           introducido por parametro que el primer elemento de la lista. */
+        if (this.ref_Asignatura != null && 
+                object.getAsignatura().getCodigo()> 
+                        this.ref_Asignatura.getAsignatura().getCodigo()){
             
-            // Se recorre hasta llegar al final y se introduce el elemento alli.
-            Ref_Asignatura ref_Asignatura = this.ref_Asignatura;
-            while (ref_Asignatura.getSiguiente() != null){
-                ref_Asignatura = ref_Asignatura.getSiguiente();
+            /* Realiza un recorrido de los elementos de la lista hasta encontrar 
+               un elemento mayor que el elemento introducir. */
+            Ref_Asignatura aux = this.ref_Asignatura;
+            while(aux.getSiguiente() != null && 
+                    object.getAsignatura().getCodigo() > 
+                        aux.getSiguiente().getAsignatura().getCodigo()){
+                
+                // Obtenemos el siguiente elemento de la lista.
+                aux = aux.getSiguiente();
             }
-            ref_Asignatura.setSiguiente(object);
+            
+            // Introduce el elemento en su posicion adecuada por el codigo.
+            object.setSiguiente(aux.getSiguiente());
+            aux.setSiguiente(object);
         } else {
             
-            // Si no se introduce en el this.ref_Ref_Asignatura sitio.
+            // Introduce el elemento en el primer sitio de la lista.
+            object.setSiguiente(this.ref_Asignatura);
             this.ref_Asignatura = object;
-        }
-        object.setSiguiente(null);
+        } 
     }
 
     /**
-     * Elimina el elemento en la posicion "index" de la lista.
+     * Elimina el elemento de la lista en la posicion indicada por index 
+     * introducido por parametro.
      * 
      * @param index 
      */
@@ -75,28 +86,40 @@ public class Lista_Ref_Asignaturas implements Interfaz_Listas<Ref_Asignatura> {
         // Si la lista esta vacia no realiza nada.
         if (this.ref_Asignatura != null) {
             
-            //Si el siguiente valor es nulo entonces elimina el this.ref_Ref_Asignatura elemento.
+            /* Si el siguiente valor despues del primer elemento es nulo 
+               entonces elimina el primer elemento de la lista. */
             if (this.ref_Asignatura.getSiguiente() == null) {
                 this.ref_Asignatura = null;
             } else {
                 
-                // Si no se realiza un recorrido hasta el elemento index-1.
+                /* Si el index es 1 entonces se elimina el primer elemento de la 
+                   lista, si no se realiza un recorrido hasta encontrar el 
+                   elemento anterior al elemento a eliminar. */
+                if (index > 1){
+                
+                // Recorre la lista en busca del elemento en la posicion index.
                 int n = 0;
-                Ref_Asignatura ref_Asignatura = this.ref_Asignatura;
+                Ref_Asignatura aux = this.ref_Asignatura;
                 while (n < index - 2) {
-                    ref_Asignatura = ref_Asignatura.getSiguiente();
+                    aux = aux.getSiguiente();
                     n++;
                 }
                 
-                // Se elimina el elemento index.
-                ref_Asignatura.setSiguiente(ref_Asignatura.getSiguiente().getSiguiente());
+                // Elimina el elemento en la posicion index.
+                aux.setSiguiente(aux.getSiguiente().getSiguiente());
+                }
+                else{
+                    
+                    // Elimina el elemento en la segunda posicion.
+                    this.ref_Asignatura = this.ref_Asignatura.getSiguiente();
+                }
             }
         }
     }
 
-        /**
-     * Devuelve el objeto Ref_Asignatura en la posicion indicada por parametro. Si no
-     * lo encuentra devuelve null.
+    /**
+     * Devuelve el objeto Ref_Asignatura en la posicion indicada por parametro. 
+     * Si no lo encuentra devuelve null.
      * 
      * @param index
      * @return 

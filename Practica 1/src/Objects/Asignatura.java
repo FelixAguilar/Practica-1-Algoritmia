@@ -1,15 +1,15 @@
 package Objects;
 
-import Interfaces.interfaz_Conceptos;
 import Lists.Lista_Ref_Estudiantes;
+import Interfaces.Interfaz_Conceptos;
 
 /**
- * Clase Asignatura. contiene los atributos y metodos que identifican una 
+ * Clase Asignatura. Contiene los atributos y metodos que identifican una 
  * asignatura.
  * 
  * @author Felix Aguilar Ferrer, Adrian Bennasar Polzin, Alvaro Bueno Lopez.
  */
-public class Asignatura implements interfaz_Conceptos{
+public class Asignatura implements Interfaz_Conceptos{
     
     // Atributos.
     private int codigo;
@@ -17,7 +17,12 @@ public class Asignatura implements interfaz_Conceptos{
     private Lista_Ref_Estudiantes ref_Estudiantes;
     private Asignatura siguiente;
 
-    // Constructor.
+    /**
+     * Constructor.
+     * 
+     * @param codigo
+     * @param nombre 
+     */
     public Asignatura(int codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;

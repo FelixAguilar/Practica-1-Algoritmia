@@ -5,7 +5,7 @@ import Objects.Asignatura;
 
 /**
  * Clase lista de asignaturas. Permite gestionar la lista añadiendo, eliminando 
- * o bien ordenado la lista.
+ * o bien modificando la lista.
  * 
  * @author Felix Aguilar Ferrer, Adrian Bennasar Polzin, Alvaro Bueno Lopez.
  */
@@ -14,15 +14,13 @@ public class Lista_Asignaturas implements Interfaz_Listas<Asignatura> {
     // Atributo.
     private Asignatura asignatura;
     
-    /**
-     * Constructor de la clase.
-     */
+    // Constructor
     public Lista_Asignaturas() {
         this.asignatura = null;
     }
 
     /**
-     * Permite obtener el valor del primer campo de la lista.
+     * Permite obtener el valor del primer elemento de la lista.
      * 
      * @return 
      */
@@ -48,29 +46,35 @@ public class Lista_Asignaturas implements Interfaz_Listas<Asignatura> {
     @Override
     public void añadir(Asignatura object) {
         
-        // Se comprueba que no este vacia la lista o que sea mayor que el primer elemento.
-        if (this.asignatura != null && object.getCodigo()> this.asignatura.getCodigo()){
+        /* Comprueba que la lista no este vacia y que sea mayor el elemento 
+           introducido por parametro que el primer elemento de la lista. */
+        if (this.asignatura != null && 
+                object.getCodigo()> this.asignatura.getCodigo()){
             
-            // Se realiza un recorrido de los elementos de la lista hasta encontrar 
-            // un elemento mayor que el que se quiere introducir.
-            Asignatura A = this.asignatura;
-            while(A.getSiguiente() != null && object.getCodigo() > A.getSiguiente().getCodigo()){
-                A = A.getSiguiente();
+            /* Realiza un recorrido de los elementos de la lista hasta encontrar 
+               un elemento mayor que el elemento introducir. */
+            Asignatura aux = this.asignatura;
+            while(aux.getSiguiente() != null && 
+                    object.getCodigo() > aux.getSiguiente().getCodigo()){
+                
+                // Obtenemos el siguiente elemento de la lista.
+                aux = aux.getSiguiente();
             }
             
-            // Se introduce el elemento en su posicion.
-            object.setSiguiente(A.getSiguiente());
-            A.setSiguiente(object);
+            // Introduce el elemento en su posicion adecuada por el codigo.
+            object.setSiguiente(aux.getSiguiente());
+            aux.setSiguiente(object);
         } else {
             
-            // Se introduce el elemento en el primer sitio de la lista.
+            // Introduce el elemento en el primer sitio de la lista.
             object.setSiguiente(this.asignatura);
             this.asignatura = object;
         } 
     }
 
     /**
-     * Elimina el elemento en la posicion "index" de la lista.
+     * Elimina el elemento de la lista en la posicion indicada por index 
+     * introducido por parametro.
      * 
      * @param index 
      */
@@ -80,52 +84,35 @@ public class Lista_Asignaturas implements Interfaz_Listas<Asignatura> {
         // Si la lista esta vacia no realiza nada.
         if (this.asignatura != null) {
             
-            //Si el siguiente valor es nulo entonces elimina el this.asignatura elemento.
+            /* Si el siguiente valor despues del primer elemento es nulo 
+               entonces elimina el primer elemento de la lista. */
             if (this.asignatura.getSiguiente() == null) {
                 this.asignatura = null;
             } else {
                 
-                // Si no se realiza un recorrido hasta el elemento index-1.
+                /* Si el index es 1 entonces se elimina el primer elemento de la 
+                   lista, si no se realiza un recorrido hasta encontrar el 
+                   elemento anterior al elemento a eliminar. */
+                if (index > 1){
+                
+                // Recorre la lista en busca del elemento en la posicion index.
                 int n = 0;
-                Asignatura asignatura = this.asignatura;
+                Asignatura aux = this.asignatura;
                 while (n < index - 2) {
-                    asignatura = asignatura.getSiguiente();
+                    aux = aux.getSiguiente();
                     n++;
                 }
                 
-                // Se elimina el elemento index.
-                asignatura.setSiguiente(asignatura.getSiguiente().getSiguiente());
-            }
-        }
-    }
-
-    /**
-     * Ordena la lista alfabeticamente segun nombre de la asignatura.
-     */
-    public void ordenarAlfabeticamente() {
-        
-        //Preparacion de variables
-        Lista_Asignaturas lista_aux = new Lista_Asignaturas();
-        Asignatura min = this.asignatura;
-        Asignatura aux = this.asignatura;
-        
-        // Comenzamos la ordenacion de maximo al minimo.
-        while(min != null){ 
-            while (aux != null) {
-                int c = min.getNombre().compareTo(aux.getNombre());
-                if (c >= 0) {
-                    aux = aux.getSiguiente();
-                } else {
-                    min = aux;
-                    aux = aux.getSiguiente();
+                // Elimina el elemento en la posicion index.
+                aux.setSiguiente(aux.getSiguiente().getSiguiente());
+                }
+                else{
+                    
+                    // Elimina el elemento en la segunda posicion.
+                    this.asignatura = this.asignatura.getSiguiente();
                 }
             }
-            lista_aux.añadir(min);
-            this.eliminar(buscarIndex(min));
-            aux = this.asignatura;
-            min = this.asignatura;
         }
-        this.asignatura = lista_aux.getAsignatura();
     }
 
     /**
@@ -139,16 +126,16 @@ public class Lista_Asignaturas implements Interfaz_Listas<Asignatura> {
     public Asignatura buscarObject(int index) {
         
         // Creamos un puntero auxiliar que apunte al primer elemento.
-        Asignatura elemento;
-        elemento = this.asignatura;
+        Asignatura aux;
+        aux = this.asignatura;
         
-        // Se realiza un recorrido hasta encontrar el campo info identico.
-        while(elemento != null && elemento.getCodigo()!= index){
-            elemento = elemento.getSiguiente();
+        // Se realiza un recorrido hasta encontrar el campo Codigo identico.
+        while(aux != null && aux.getCodigo()!= index){
+            aux = aux.getSiguiente();
         }
         
         // Se devuelve el puntero.
-        return elemento;
+        return aux;
     }
     
     /**

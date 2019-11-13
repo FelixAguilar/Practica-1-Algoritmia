@@ -14,9 +14,7 @@ public class Lista_Estudiantes implements Interfaz_Listas<Estudiante> {
     // Atributo.
     private Estudiante estudiante;
     
-    /**
-     * Constructor de la clase.
-     */
+    // Constructor.
     public Lista_Estudiantes() {
         this.estudiante = null;
     }
@@ -40,29 +38,35 @@ public class Lista_Estudiantes implements Interfaz_Listas<Estudiante> {
     } 
 
     /**
-     * Permite añadir un elemento al final de la lista.
+     * Permite añadir un elemento a la lista de forma ordenada por el Nombre del
+     * estudiante.
      * 
      * @param object 
      */
     @Override
     public void añadir(Estudiante object) {
 
-        // Se comprueba que no este vacia la lista o que sea mayor que el primer elemento.
-        if (this.estudiante != null && object.getNombre().compareTo(this.estudiante.getNombre()) <= 0){
+        /* Comprueba que la lista no este vacia y que sea mayor el elemento 
+           introducido por parametro que el primer elemento de la lista. */
+        if (this.estudiante != null && 
+                object.getNombre().compareTo(this.estudiante.getNombre()) <= 0){
             
-            // Se realiza un recorrido de los elementos de la lista hasta encontrar 
-            // un elemento mayor que el que se quiere introducir.
-            Estudiante estudiante = this.estudiante;
-            while(estudiante.getSiguiente() != null && object.getNombre().compareTo(estudiante.getNombre()) <= 0){
-                estudiante = estudiante.getSiguiente();
+            /* Realiza un recorrido de los elementos de la lista hasta encontrar 
+               un elemento mayor que el elemento introducir. */
+            Estudiante aux = this.estudiante;
+            while(aux.getSiguiente() != null && 
+                    object.getNombre().compareTo(aux.getNombre()) <= 0){
+                
+                // Obtenemos el siguiente elemento de la lista.
+                aux = aux.getSiguiente();
             }
             
-            // Se introduce el elemento en su posicion.
-            object.setSiguiente(estudiante.getSiguiente());
-            estudiante.setSiguiente(object);
+            // Introduce el elemento en su posicion adecuada por el nombre.
+            object.setSiguiente(aux.getSiguiente());
+            aux.setSiguiente(object);
         } else {
             
-            // Se introduce el elemento en el primer sitio de la lista.
+            // Introduce el elemento en el primer sitio de la lista.
             object.setSiguiente(this.estudiante);
             this.estudiante = object;
         } 
@@ -70,7 +74,8 @@ public class Lista_Estudiantes implements Interfaz_Listas<Estudiante> {
     }
 
     /**
-     * Elimina el elemento en la posicion "index" de la lista.
+     * Elimina el elemento de la lista en la posicion indicada por index 
+     * introducido por parametro.
      * 
      * @param index 
      */
@@ -80,28 +85,40 @@ public class Lista_Estudiantes implements Interfaz_Listas<Estudiante> {
         // Si la lista esta vacia no realiza nada.
         if (this.estudiante != null) {
             
-            //Si el siguiente valor es nulo entonces elimina el this.estudiante elemento.
+            /* Si el siguiente valor despues del primer elemento es nulo 
+               entonces elimina el primer elemento de la lista. */
             if (this.estudiante.getSiguiente() == null) {
                 this.estudiante = null;
             } else {
                 
-                // Si no se realiza un recorrido hasta el elemento index-1.
+                /* Si el index es 1 entonces se elimina el primer elemento de la 
+                   lista, si no se realiza un recorrido hasta encontrar el 
+                   elemento anterior al elemento a eliminar. */
+                if (index > 1){
+                
+                // Recorre la lista en busca del elemento en la posicion index.
                 int n = 0;
-                Estudiante estudiante = this.estudiante;
+                Estudiante aux = this.estudiante;
                 while (n < index - 2) {
-                    estudiante = estudiante.getSiguiente();
+                    aux = aux.getSiguiente();
                     n++;
                 }
                 
-                // Se elimina el elemento index.
-                estudiante.setSiguiente(estudiante.getSiguiente().getSiguiente());
+                // Elimina el elemento en la posicion index.
+                aux.setSiguiente(aux.getSiguiente().getSiguiente());
+                }
+                else{
+                    
+                    // Elimina el elemento en la segunda posicion.
+                    this.estudiante = this.estudiante.getSiguiente();
+                }
             }
         }
     }
 
-        /**
-     * Devuelve el objeto Estudiante en la posicion indicada por parametro. Si no
-     * lo encuentra devuelve null.
+    /**
+     * Devuelve el objeto Estudiante en la posicion indicada por parametro. Si 
+     * no lo encuentra devuelve null.
      * 
      * @param index
      * @return 
@@ -110,16 +127,16 @@ public class Lista_Estudiantes implements Interfaz_Listas<Estudiante> {
     public Estudiante buscarObject(int index) {
         
         // Creamos un puntero auxiliar que apunte al primer elemento.
-        Estudiante elemento;
-        elemento = this.estudiante;
+        Estudiante aux;
+        aux = this.estudiante;
         
         // Se realiza un recorrido hasta encontrar el campo info identico.
-        while(elemento != null && elemento.getDni()!= index){
-            elemento = elemento.getSiguiente();
+        while(aux != null && aux.getDni()!= index){
+            aux = aux.getSiguiente();
         }
         
         // Se devuelve el puntero.
-        return elemento;
+        return aux;
     }
     
     /**
