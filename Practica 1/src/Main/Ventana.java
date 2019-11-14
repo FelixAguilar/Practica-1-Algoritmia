@@ -74,14 +74,14 @@ public class Ventana extends JFrame {
         butones.add(botonMatriculaEstudiante, gbc);
 
         //Boton de buscar por usuario.
-        JButton botonEliminarK = new JButton();
-        botonEliminarK.setText(ELIMINARCURSO);
-        butones.add(botonEliminarK, gbc);
+        JButton botonEliminarCurso = new JButton();
+        botonEliminarCurso.setText(ELIMINARCURSO);
+        butones.add(botonEliminarCurso, gbc);
 
         //Boton de ingresar dinero a cuenta.
-        JButton botonCrearO = new JButton();
-        botonCrearO.setText(ELIMINARASIGNATURA);
-        butones.add(botonCrearO, gbc);
+        JButton botonEliminarAsignatura = new JButton();
+        botonEliminarAsignatura.setText(ELIMINARASIGNATURA);
+        butones.add(botonEliminarAsignatura, gbc);
 
         //Boton de extraer dinero de cuenta.
         JButton botonMostrarCurso = new JButton();
@@ -120,15 +120,15 @@ public class Ventana extends JFrame {
             }
         });
         
-        botonEliminarK.addActionListener(new java.awt.event.ActionListener() {
+        botonEliminarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                
+                eliminarCurso();
             }
         });
         
-        botonCrearO.addActionListener(new java.awt.event.ActionListener() {
+        botonEliminarAsignatura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-               
+                  eliminarAsignatura();
             }
         });
         
@@ -312,7 +312,7 @@ public class Ventana extends JFrame {
         //Escuchadores de eventos.
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent e) {
-                Estudiante estudiante = o.matricular_Estudiante(Integer.parseInt(curso.getText()),Integer.parseInt(asignatura.getText()),Integer.parseInt(codigo.getText()), nombre.getText());
+                o.matricular_Estudiante(Integer.parseInt(curso.getText()),Integer.parseInt(asignatura.getText()),Integer.parseInt(codigo.getText()), nombre.getText());
                 frame.dispose();
             }
         }); 
@@ -814,6 +814,130 @@ public class Ventana extends JFrame {
             }
         });   
        
+        
+    }
+    
+     private String eliminarCurso(){ // ELIMINA TODAS LAS ASIGNATURAS PERO NO ELIMINA EL CURSO!!
+        
+        JFrame frame = nuevaVentana(NUEVOCURSO);
+        
+        JPanel menu = new JPanel();
+        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
+        menu.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JPanel entrada = new JPanel(new GridBagLayout());
+        
+        JPanel linea1 = new JPanel();
+        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
+        JPanel linea2 = new JPanel();
+        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
+        JPanel linea3 = new JPanel();
+        linea3.setLayout(new BoxLayout(linea3, BoxLayout.X_AXIS));
+        JPanel linea4 = new JPanel();
+        linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
+        JPanel linea5 = new JPanel();
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoCodigo = new JLabel("Codigo:");
+        JTextField codigo = new JTextField();
+        linea1.add(infoCodigo);
+        linea1.add(codigo);
+       
+        //Botones.
+        JButton botonAceptar = new JButton();
+        botonAceptar.setText("Aceptar");
+        linea4.add(botonAceptar);
+        linea4.add(botonRetroceder(frame));
+        
+        //Adición de componentes a la pantalla.
+        entrada.add(linea1, gbc);
+        entrada.add(linea2, gbc);
+        entrada.add(linea3, gbc);
+        entrada.add(linea4, gbc);
+        
+        gbc.weighty = 1;
+        menu.add(entrada, gbc);
+        frame.add(menu);
+        frame.pack();
+        
+        //Escuchadores de eventos.
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) { 
+               o.eliminar_Curso(Integer.parseInt(codigo.getText()));
+               frame.dispose();
+               
+            }
+        });   
+        return null;
+        
+    }
+     
+      private String eliminarAsignatura(){ // ELIMINA TODAS LAS ASIGNATURAS PERO NO ELIMINA EL CURSO!!
+        
+        JFrame frame = nuevaVentana(NUEVOCURSO);
+        
+        JPanel menu = new JPanel();
+        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
+        menu.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JPanel entrada = new JPanel(new GridBagLayout());
+        
+        JPanel linea1 = new JPanel();
+        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
+        JPanel linea2 = new JPanel();
+        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
+        JPanel linea3 = new JPanel();
+        linea3.setLayout(new BoxLayout(linea3, BoxLayout.X_AXIS));
+        JPanel linea4 = new JPanel();
+        linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
+        JPanel linea5 = new JPanel();
+        
+
+        
+        //Campo de texto para Nombre de la cuenta y label de este.
+        JLabel infoCodigo = new JLabel("Codigo:");
+        JTextField codigo = new JTextField();
+        linea1.add(infoCodigo);
+        linea1.add(codigo);
+       
+        //Botones.
+        JButton botonAceptar = new JButton();
+        botonAceptar.setText("Aceptar");
+        linea4.add(botonAceptar);
+        linea4.add(botonRetroceder(frame));
+        
+        //Adición de componentes a la pantalla.
+        entrada.add(linea1, gbc);
+        entrada.add(linea2, gbc);
+        entrada.add(linea3, gbc);
+        entrada.add(linea4, gbc);
+        
+        gbc.weighty = 1;
+        menu.add(entrada, gbc);
+        frame.add(menu);
+        frame.pack();
+        
+        //Escuchadores de eventos.
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) { 
+               o.eliminar_Asignatura(Integer.parseInt(codigo.getText()));
+               frame.dispose();
+               
+            }
+        });   
+        return null;
         
     }
     /*
