@@ -50,14 +50,14 @@ public class Lista_Ref_Estudiantes implements Interfaz_Listas<Ref_Estudiante> {
            introducido por parametro que el primer elemento de la lista. */
         if (this.ref_Estudiante != null && 
                 object.getEstudiante().getNombre().compareTo(
-                        this.ref_Estudiante.getEstudiante().getNombre()) <= 0){
+                        this.ref_Estudiante.getEstudiante().getNombre()) >= 0){
             
             /* Realiza un recorrido de los elementos de la lista hasta encontrar 
                un elemento mayor que el elemento introducir. */
             Ref_Estudiante aux = this.ref_Estudiante;
             while(aux.getSiguiente() != null && 
                     object.getEstudiante().getNombre().compareTo(
-                            aux.getEstudiante().getNombre()) <= 0){
+                            aux.getSiguiente().getEstudiante().getNombre()) >= 0){
                 
                 // Obtenemos el siguiente elemento de la lista.
                 aux = aux.getSiguiente();
@@ -96,7 +96,7 @@ public class Lista_Ref_Estudiantes implements Interfaz_Listas<Ref_Estudiante> {
                 /* Si el index es 1 entonces se elimina el primer elemento de la 
                    lista, si no se realiza un recorrido hasta encontrar el 
                    elemento anterior al elemento a eliminar. */
-                if (index > 1){
+                if (index >= 1){
                 
                 // Recorre la lista en busca del elemento en la posicion index.
                 int n = 0;

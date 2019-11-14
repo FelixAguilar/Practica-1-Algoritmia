@@ -95,7 +95,7 @@ public class Lista_Ref_Asignaturas implements Interfaz_Listas<Ref_Asignatura> {
                 /* Si el index es 1 entonces se elimina el primer elemento de la 
                    lista, si no se realiza un recorrido hasta encontrar el 
                    elemento anterior al elemento a eliminar. */
-                if (index > 1){
+                if (index >= 1){
                 
                 // Recorre la lista en busca del elemento en la posicion index.
                 int n = 0;
