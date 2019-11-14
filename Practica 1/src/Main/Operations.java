@@ -118,26 +118,41 @@ public class Operations {
      */
     public Asignatura matricular_Estudiante(int codigo_curso, int codigo_asignatura, int dni, String nombre) {
 
-        //Busca la asignatura, si existe, entonces matricula.
-        Asignatura asignatura = cursos.buscarObject(codigo_curso).getAsignaturas().buscarObject(codigo_asignatura);
-        if (asignatura != null) {
+        Asignatura asignatura = null;
+        Curso curso = cursos.buscarObject(codigo_curso);
+        if (curso != null) {
+            //Busca la asignatura, si existe, entonces matricula.
+            asignatura = curso.getAsignaturas().buscarObject(codigo_asignatura);
+            if (asignatura != null) {
 
-            // Busca si hay un estudiante ya con el dni, sino lo crea.
-            Estudiante estudiante = estudiantes.buscarObject(dni);
-            if (estudiante == null) {
-                estudiante = new Estudiante(dni, nombre);
-                estudiantes.añadir(estudiante);
+                // Busca si hay un estudiante ya con el dni, sino lo crea.
+                Estudiante estudiante = estudiantes.buscarObject(dni);
+                if (estudiante == null) {
+                    estudiante = new Estudiante(dni, nombre);
+                    estudiantes.añadir(estudiante);
+                } else {
+                    Ref_Asignatura aux = estudiante.getRef_Asignaturas().getRef_Asignatura();
+                    while (aux != null && asignatura != null) {
+                        if (aux.getAsignatura() == asignatura) {
+                            asignatura = null;
+                        } else {
+                            aux = aux.getSiguiente();
+                        }
+                    }
+                }
+                if (asignatura != null) {
+
+                    // Se añade la referencia de estudiante a la asignatura.
+                    Ref_Estudiante refE = new Ref_Estudiante(estudiante);
+                    asignatura.getRef_Estudiantes().añadir(refE);
+
+                    // Se añade la referencia de asignatura al estudiante.
+                    Ref_Asignatura refA = new Ref_Asignatura(asignatura);
+                    estudiante.getRef_Asignaturas().añadir(refA);
+                }
             }
-
-            // Se añade la referencia de estudiante a la asignatura.
-            Ref_Estudiante refE = new Ref_Estudiante(estudiante);
-            asignatura.getRef_Estudiantes().añadir(refE);
-
-            // Se añade la referencia de asignatura al estudiante.
-            Ref_Asignatura refA = new Ref_Asignatura(asignatura);
-            estudiante.getRef_Asignaturas().añadir(refA);
         }
-        
+
         // Devuelve null si ha habido un problema, sino el punero de asignatura.
         return asignatura;
     }
@@ -178,55 +193,57 @@ public class Operations {
 
         // Obtiene el primer curso y realiza la primera busqueda de asignatura.
         Curso curso = cursos.getCurso();
-        Asignatura asignatura = curso.getAsignaturas().buscarObject(codigo);
+        Asignatura asignatura = null;
 
-        // Recorrido de busqueda de la asignatura.
-        while (curso != null && asignatura == null) {
-            curso = curso.getSiguiente();
-            if (curso != null) {
-                asignatura = curso.getAsignaturas().buscarObject(codigo);
-            }
-        }
+        if (curso != null) {
+            asignatura = curso.getAsignaturas().buscarObject(codigo);
 
-        // Si existe la asignatura y el curso entonces se elimina.
-        if (asignatura != null && curso != null) {
-
-            // Obtiene el primer estudiante.
-            Estudiante estudiante = estudiantes.getEstudiante();
-
-            // Se elimina los estudiantes matriculados en la asignatura.
-            Ref_Estudiante ref_estudiante = asignatura.getRef_Estudiantes().getRef_Estudiante();
-            while (ref_estudiante != null) {
-
-                // Si la referencia es igual al primer estudiante.
-                if (ref_estudiante.getEstudiante() == estudiante) {
-
-                    // Siguiente referencia.
-                    ref_estudiante = ref_estudiante.getSiguiente();
-
-                    // Se busca la referencia de asignatura.
-                    Ref_Asignatura ref_asignatura = estudiante.getRef_Asignaturas().getRef_Asignatura();
-                    while (ref_asignatura.getAsignatura() != asignatura) {
-                        ref_asignatura = ref_asignatura.getSiguiente();
-                    }
-
-                    // Se elimina la referencia de asignatura del estudiante.
-                    estudiante.getRef_Asignaturas().eliminar(estudiante.getRef_Asignaturas().buscarIndex(ref_asignatura));
-
-                    // Si no exisiten mas matriculas se elimina el estudiante.
-                    if (estudiante.getRef_Asignaturas().getRef_Asignatura() == null) {
-                        estudiantes.eliminar(estudiantes.buscarIndex(estudiante));
-                    }
-
+            // Recorrido de busqueda de la asignatura.
+            while (curso != null && asignatura == null) {
+                curso = curso.getSiguiente();
+                if (curso != null) {
+                    asignatura = curso.getAsignaturas().buscarObject(codigo);
                 }
-                estudiante = estudiante.getSiguiente();
-
             }
 
-            // Eliminamos la asignatura.
-            curso.getAsignaturas().eliminar(curso.getAsignaturas().buscarIndex(asignatura));
+            // Si existe la asignatura y el curso entonces se elimina.
+            if (asignatura != null && curso != null) {
+
+                // Obtiene el primer estudiante.
+                Estudiante estudiante = estudiantes.getEstudiante();
+
+                // Se elimina los estudiantes matriculados en la asignatura.
+                Ref_Estudiante ref_estudiante = asignatura.getRef_Estudiantes().getRef_Estudiante();
+                while (ref_estudiante != null) {
+
+                    // Si la referencia es igual al primer estudiante.
+                    if (ref_estudiante.getEstudiante() == estudiante) {
+
+                        // Siguiente referencia.
+                        ref_estudiante = ref_estudiante.getSiguiente();
+
+                        // Se busca la referencia de asignatura.
+                        Ref_Asignatura ref_asignatura = estudiante.getRef_Asignaturas().getRef_Asignatura();
+                        while (ref_asignatura.getAsignatura() != asignatura) {
+                            ref_asignatura = ref_asignatura.getSiguiente();
+                        }
+
+                        // Se elimina la referencia de asignatura del estudiante.
+                        estudiante.getRef_Asignaturas().eliminar(estudiante.getRef_Asignaturas().buscarIndex(ref_asignatura));
+
+                        // Si no exisiten mas matriculas se elimina el estudiante.
+                        if (estudiante.getRef_Asignaturas().getRef_Asignatura() == null) {
+                            estudiantes.eliminar(estudiantes.buscarIndex(estudiante));
+                        }
+                    }
+                    estudiante = estudiante.getSiguiente();
+                }
+
+                // Eliminamos la asignatura.
+                curso.getAsignaturas().eliminar(curso.getAsignaturas().buscarIndex(asignatura));
+            }
         }
-        
+
         // Si hubo un problema devueleve null, sino el puntero de la asignatura.
         return asignatura;
     }
@@ -263,7 +280,7 @@ public class Operations {
                 asignatura = asignatura.getSiguiente();
             }
         }
-        
+
         // Devuelve "" si hubo un problema.
         return s;
     }
@@ -302,7 +319,7 @@ public class Operations {
                 }
             }
         }
-        
+
         // Devuelve "" si hubo un problema.
         return s;
     }
@@ -347,7 +364,7 @@ public class Operations {
                 ref_asignatura = ref_asignatura.getSiguiente();
             }
         }
-        
+
         // Devuelve "" si hubo un problema.
         return s;
     }
