@@ -68,32 +68,32 @@ public class Ventana extends JFrame {
         botonNuevoCurso.setText(NUEVOCURSO);
         butones.add(botonNuevoCurso, gbc);
 
-        //Boton de buscar por cuenta.
+        //Boton de matricular estudiante.
         JButton botonMatriculaEstudiante = new JButton();
         botonMatriculaEstudiante.setText(MATRICULAESTUDIANTE);
         butones.add(botonMatriculaEstudiante, gbc);
 
-        //Boton de buscar por usuario.
+        //Boton de dar de baja un curso.
         JButton botonEliminarCurso = new JButton();
         botonEliminarCurso.setText(ELIMINARCURSO);
         butones.add(botonEliminarCurso, gbc);
 
-        //Boton de ingresar dinero a cuenta.
+        //Boton de eliminar asignatura.
         JButton botonEliminarAsignatura = new JButton();
         botonEliminarAsignatura.setText(ELIMINARASIGNATURA);
         butones.add(botonEliminarAsignatura, gbc);
 
-        //Boton de extraer dinero de cuenta.
+        //Boton de mostrar contenido de un curso.
         JButton botonMostrarCurso = new JButton();
         botonMostrarCurso.setText(MOSTRARCURSO);
         butones.add(botonMostrarCurso, gbc);
         
-        //Boton de extraer dinero de cuenta.
+        //Boton de mostrar información asignatura.
         JButton botonMostrarAsignatura = new JButton();
         botonMostrarAsignatura.setText(MOSTRARASIGNATURA);
         butones.add(botonMostrarAsignatura, gbc);
         
-        //Boton de extraer dinero de cuenta.
+        //Boton de mostrar información estudiante.
         JButton botonMostrarEstudiante = new JButton();
         botonMostrarEstudiante.setText(MOSTRARESTUDIANTE);
         butones.add(botonMostrarEstudiante, gbc);
@@ -185,13 +185,13 @@ public class Ventana extends JFrame {
         linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
         JPanel linea5 = new JPanel();
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el código asociado al curso.
         JLabel infoCodigo = new JLabel("Codigo:");
         JTextField codigo = new JTextField();
         linea1.add(infoCodigo);
         linea1.add(codigo);
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el nombre asociado al curso.
         JLabel infoNombre = new JLabel("Nombre:");
         JTextField nombre = new JTextField();
         linea2.add(infoNombre);
@@ -266,25 +266,25 @@ public class Ventana extends JFrame {
         JPanel linea5 = new JPanel();
         linea5.setLayout(new BoxLayout(linea5, BoxLayout.X_AXIS));
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el DNI asociado al estudiante.
         JLabel infoCodigo = new JLabel("DNI:");
         JTextField codigo = new JTextField();
         linea1.add(infoCodigo);
         linea1.add(codigo);
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el nombre del estudiante.
         JLabel infoNombre = new JLabel("Nombre:");
         JTextField nombre = new JTextField();
         linea2.add(infoNombre);
         linea2.add(nombre);
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el código asociado a la asignatura de la que se quiere matricular.
         JLabel infoAsignatura = new JLabel("Asignatura:");
         JTextField asignatura = new JTextField();
         linea3.add(infoAsignatura);
         linea3.add(asignatura);
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el código asociado al curso.
         JLabel infoCurso = new JLabel("Curso:");
         JTextField curso = new JTextField();
         linea4.add(infoCurso);
@@ -346,7 +346,7 @@ public class Ventana extends JFrame {
         linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
         JPanel linea5 = new JPanel();
        
-        //Select para el tipo de curso.
+        //Select para el tipo de FP.
         JLabel infoTipoFP = new JLabel("Tipo:");
         JComboBox tipoFP = new JComboBox();
         tipoFP.addItem("Informática");
@@ -378,7 +378,6 @@ public class Ventana extends JFrame {
                Curso curso = o.nuevo_Curso(codigo, nombre, tipo, tipoFP.getSelectedItem().toString());
                añadirAsignatura(curso); 
                frame.dispose();
-               // nuevoCurso2();
             }
         });   
              
@@ -410,7 +409,7 @@ public class Ventana extends JFrame {
         linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
         JPanel linea5 = new JPanel();
        
-        //Select para el tipo de curso.
+        //Select para el curso de bachillerato.
         JLabel infoTipoBachiller = new JLabel("Tipo:");
         JComboBox tipoBachiller = new JComboBox();
         tipoBachiller.addItem("Primero");
@@ -474,19 +473,19 @@ public class Ventana extends JFrame {
         linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
         JPanel linea5 = new JPanel();
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el código asociado a la asignatura.
         JLabel infoCodigo = new JLabel("Codigo:");
         JTextField codigo = new JTextField();
         linea1.add(infoCodigo);
         linea1.add(codigo);
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el nombre de la asignatura.
         JLabel infoNombre = new JLabel("Nombre:");
         JTextField nombre = new JTextField();
         linea2.add(infoNombre);
         linea2.add(nombre);
         
-        //Select para el tipo de curso.
+        //Select para el tipo de asignatura.
         JLabel infoTipoAsignatura = new JLabel("Tipo:");
         JComboBox tipoAsignatura = new JComboBox();
         tipoAsignatura.addItem("Obligatoria");
@@ -552,7 +551,7 @@ public class Ventana extends JFrame {
         linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
         JPanel linea5 = new JPanel();
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el número de créditos de una asignatura obligatoria.
         JLabel infoCreditos = new JLabel("Créditos:");
         JTextField creditos = new JTextField();
         linea1.add(infoCreditos);
@@ -580,7 +579,6 @@ public class Ventana extends JFrame {
             public void actionPerformed(java.awt.event.ActionEvent e) { 
                o.nueva_Asignatura(curso, codigo, nombre, tipo, creditos.getText());
                frame.dispose();
-               //nuevoCurso2();
             }
         });   
       
@@ -613,6 +611,7 @@ public class Ventana extends JFrame {
         linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
         JPanel linea5 = new JPanel();
         
+        //Campo de texto para el tipo de asignatura optativa.
         JLabel infoTipoOptativa = new JLabel("Tipo:");
         JComboBox tipoOptativa = new JComboBox();
         tipoOptativa .addItem("Teórica");
@@ -671,7 +670,7 @@ public class Ventana extends JFrame {
         linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
         
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el código asociado al curso.
         JLabel infoCodigo = new JLabel("Codigo:");
         JTextField codigo = new JTextField();
         linea1.add(infoCodigo);
@@ -727,7 +726,7 @@ public class Ventana extends JFrame {
         linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
         
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el código de la asignatura.
         JLabel infoCodigo = new JLabel("Codigo:");
         JTextField codigo = new JTextField();
         linea1.add(infoCodigo);
@@ -783,7 +782,7 @@ public class Ventana extends JFrame {
         linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
         
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el DNI asociado al estudiante.
         JLabel infoDni = new JLabel("DNI:");
         JTextField dni = new JTextField();
         linea1.add(infoDni);
@@ -817,7 +816,7 @@ public class Ventana extends JFrame {
         
     }
     
-     private String eliminarCurso(){ // ELIMINA TODAS LAS ASIGNATURAS PERO NO ELIMINA EL CURSO!!
+     private String eliminarCurso(){ 
         
         JFrame frame = nuevaVentana(NUEVOCURSO);
         
@@ -843,7 +842,7 @@ public class Ventana extends JFrame {
         linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
         JPanel linea5 = new JPanel();
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el código asociado al curso.
         JLabel infoCodigo = new JLabel("Codigo:");
         JTextField codigo = new JTextField();
         linea1.add(infoCodigo);
@@ -878,7 +877,7 @@ public class Ventana extends JFrame {
         
     }
      
-      private String eliminarAsignatura(){ // ELIMINA TODAS LAS ASIGNATURAS PERO NO ELIMINA EL CURSO!!
+      private String eliminarAsignatura(){ 
         
         JFrame frame = nuevaVentana(NUEVOCURSO);
         
@@ -906,7 +905,7 @@ public class Ventana extends JFrame {
         
 
         
-        //Campo de texto para Nombre de la cuenta y label de este.
+        //Campo de texto para el código de la asignatura.
         JLabel infoCodigo = new JLabel("Codigo:");
         JTextField codigo = new JTextField();
         linea1.add(infoCodigo);
@@ -940,83 +939,8 @@ public class Ventana extends JFrame {
         return null;
         
     }
-    /*
-    private String nuevoCurso2(){
-        
-        JFrame frame = nuevaVentana(NUEVOCURSO);
-        
-        JPanel menu = new JPanel();
-        menu.setBorder(new EmptyBorder(10, 10, 10, 10));
-        menu.setLayout(new GridBagLayout());
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-
-        JPanel entrada = new JPanel(new GridBagLayout());
-        
-        JPanel linea1 = new JPanel();
-        linea1.setLayout(new BoxLayout(linea1, BoxLayout.X_AXIS));
-        JPanel linea2 = new JPanel();
-        linea2.setLayout(new BoxLayout(linea2, BoxLayout.X_AXIS));
-        JPanel linea3 = new JPanel();
-        linea3.setLayout(new BoxLayout(linea3, BoxLayout.X_AXIS));
-        JPanel linea4 = new JPanel();
-        linea4.setLayout(new BoxLayout(linea4, BoxLayout.X_AXIS));
-        JPanel linea5 = new JPanel();
-        
-        //Campo de texto para Nombre de la cuenta y label de este.
-        JLabel infoCodigo = new JLabel("Codigo:");
-        JTextField codigo = new JTextField();
-        linea1.add(infoCodigo);
-        linea1.add(codigo);
-        
-        //Campo de texto para Nombre de la cuenta y label de este.
-        JLabel infoNombre = new JLabel("Nombre:");
-        JTextField nombre = new JTextField();
-        linea2.add(infoNombre);
-        linea2.add(nombre);
-        
-        //Select para el tipo de curso.
-        JLabel infoTipoAsignatura = new JLabel("Tipo:");
-        JComboBox tipoAsignatura = new JComboBox();
-        tipoAsignatura.addItem("Obligatoria");
-        tipoAsignatura.addItem("Optativa");
-        linea3.add(infoTipoAsignatura);
-        linea3.add(tipoAsignatura);
-        
-        //Botones.
-        JButton botonAceptar = new JButton();
-        botonAceptar.setText("Aceptar");
-        linea4.add(botonAceptar);
-        linea4.add(botonRetroceder(frame));
-        
-        //Adición de componentes a la pantalla.
-        entrada.add(linea1, gbc);
-        entrada.add(linea2, gbc);
-        entrada.add(linea3, gbc);
-        entrada.add(linea4, gbc);
-        
-        gbc.weighty = 1;
-        menu.add(entrada, gbc);
-        frame.add(menu);
-        frame.pack();
-        
-        //Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) { 
-               frame.dispose();
-               nuevoCurso2();
-            }
-        });   
-        return null;
-        
-    }
-   */
-    
-    public void Popup(JFrame f, String mensaje){
+   
+     public void Popup(JFrame f, String mensaje){
         JOptionPane.showMessageDialog(f, mensaje);
     }
     
