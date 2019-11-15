@@ -4,13 +4,13 @@ import Lists.Lista_Ref_Asignaturas;
 import Interfaces.Interfaz_Conceptos;
 
 /**
- * Clase estudiante. Contiene los atributos y metodos que definen a un 
+ * Clase estudiante. Contiene los atributos y metodos que definen a un
  * estudiante.
- * 
+ *
  * @author Felix Aguilar Ferrer, Adrian Bennasar Polzin, Alvaro Bueno.
  */
-public class Estudiante implements Interfaz_Conceptos{
-    
+public class Estudiante implements Interfaz_Conceptos {
+
     // Atributos.
     private int dni;
     private String nombre;
@@ -19,9 +19,9 @@ public class Estudiante implements Interfaz_Conceptos{
 
     /**
      * Constructor.
-     * 
+     *
      * @param dni
-     * @param nombre 
+     * @param nombre
      */
     public Estudiante(int dni, String nombre) {
         this.dni = dni;
@@ -32,8 +32,8 @@ public class Estudiante implements Interfaz_Conceptos{
 
     /**
      * Metodo para obtener el DNI del estudiante.
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getDni() {
         return dni;
@@ -41,8 +41,8 @@ public class Estudiante implements Interfaz_Conceptos{
 
     /**
      * Metodo para actualizar el DNI del estudiante.
-     * 
-     * @param dni 
+     *
+     * @param dni
      */
     public void setDni(int dni) {
         this.dni = dni;
@@ -50,8 +50,8 @@ public class Estudiante implements Interfaz_Conceptos{
 
     /**
      * Metodo para obtener el nombre del estudiante.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getNombre() {
         return nombre;
@@ -59,8 +59,8 @@ public class Estudiante implements Interfaz_Conceptos{
 
     /**
      * Metodo para actualizar el nombre del estudiante.
-     * 
-     * @param nombre 
+     *
+     * @param nombre
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -68,8 +68,8 @@ public class Estudiante implements Interfaz_Conceptos{
 
     /**
      * Metodo para obtener el siguiente estudiante de la lista.
-     * 
-     * @return 
+     *
+     * @return
      */
     public Estudiante getSiguiente() {
         return siguiente;
@@ -77,8 +77,8 @@ public class Estudiante implements Interfaz_Conceptos{
 
     /**
      * Metodo para actualizar el siguiente estudiante de la lista.
-     * 
-     * @param siguiente 
+     *
+     * @param siguiente
      */
     public void setSiguiente(Estudiante siguiente) {
         this.siguiente = siguiente;
@@ -86,8 +86,8 @@ public class Estudiante implements Interfaz_Conceptos{
 
     /**
      * Metodo para obtener la lista de referencias de asignaturas.
-     * 
-     * @return 
+     *
+     * @return
      */
     public Lista_Ref_Asignaturas getRef_Asignaturas() {
         return ref_Asignaturas;
@@ -95,21 +95,21 @@ public class Estudiante implements Interfaz_Conceptos{
 
     /**
      * Metodo para actualizar la lista de referencias de asignaturas.
-     * 
-     * @param ref_Asignaturas 
+     *
+     * @param ref_Asignaturas
      */
     public void setRef_Asignaturas(Lista_Ref_Asignaturas ref_Asignaturas) {
         this.ref_Asignaturas = ref_Asignaturas;
     }
-    
+
     /**
      * Devuelve un string con los atributos de un estudiante.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "DNI: " + dni + ", nombre: " + nombre + ".";
     }
-    
+
 }

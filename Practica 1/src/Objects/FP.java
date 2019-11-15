@@ -5,20 +5,20 @@ import Interfaces.Interfaz_Conceptos;
 /**
  * Clase FP. Contiene los atributos y metodos que identifican una clase FP, esta
  * es hija de la clase Curso.
- * 
+ *
  * @author Felix Aguilar Ferrer, Adrian Bennasar Polzin, Alvaro Bueno Lopez.
  */
-public class FP extends Curso implements Interfaz_Conceptos{
-    
+public class FP extends Curso implements Interfaz_Conceptos {
+
     // Atributo.
     private String especialidad;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param codigo
      * @param nombre
-     * @param especialidad 
+     * @param especialidad
      */
     public FP(int codigo, String nombre, String especialidad) {
         super(codigo, nombre);
@@ -27,8 +27,8 @@ public class FP extends Curso implements Interfaz_Conceptos{
 
     /**
      * Metodo para obtener la especialidad del curso.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getEspecialidad() {
         return especialidad;
@@ -36,24 +36,23 @@ public class FP extends Curso implements Interfaz_Conceptos{
 
     /**
      * Metodo para actualizar la especialidad del curso.
-     * 
-     * @param especialidad 
+     *
+     * @param especialidad
      */
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
-    
+
     /**
-     * Metodo que devuelve un string con los atributos de un curso. Incluye el 
+     * Metodo que devuelve un string con los atributos de un curso. Incluye el
      * tipo de asignatura que es.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
-    public String toString(){
-        return "Codigo: " + this.getCodigo() + ", Nombre:" + this.getNombre() + 
-                ", Tipo: FP, Especialidad: " + especialidad + ".";
+    public String toString() {
+        return "Codigo: " + this.getCodigo() + ", Nombre:" + this.getNombre()
+                + ", Tipo: FP, Especialidad: " + especialidad + ".";
     }
-    
-    
+
 }

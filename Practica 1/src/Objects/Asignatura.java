@@ -4,13 +4,13 @@ import Lists.Lista_Ref_Estudiantes;
 import Interfaces.Interfaz_Conceptos;
 
 /**
- * Clase Asignatura. Contiene los atributos y metodos que identifican una 
+ * Clase Asignatura. Contiene los atributos y metodos que identifican una
  * asignatura.
- * 
+ *
  * @author Felix Aguilar Ferrer, Adrian Bennasar Polzin, Alvaro Bueno Lopez.
  */
-public class Asignatura implements Interfaz_Conceptos{
-    
+public class Asignatura implements Interfaz_Conceptos {
+
     // Atributos.
     private int codigo;
     private String nombre;
@@ -19,9 +19,9 @@ public class Asignatura implements Interfaz_Conceptos{
 
     /**
      * Constructor.
-     * 
+     *
      * @param codigo
-     * @param nombre 
+     * @param nombre
      */
     public Asignatura(int codigo, String nombre) {
         this.codigo = codigo;
@@ -32,8 +32,8 @@ public class Asignatura implements Interfaz_Conceptos{
 
     /**
      * Metodo para obtener el codigo.
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getCodigo() {
         return codigo;
@@ -41,8 +41,8 @@ public class Asignatura implements Interfaz_Conceptos{
 
     /**
      * Metodo para actualizar el codigo.
-     * 
-     * @param codigo 
+     *
+     * @param codigo
      */
     public void setCodigo(int codigo) {
         this.codigo = codigo;
@@ -50,8 +50,8 @@ public class Asignatura implements Interfaz_Conceptos{
 
     /**
      * Metodo para obtener el nombre.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getNombre() {
         return nombre;
@@ -59,8 +59,8 @@ public class Asignatura implements Interfaz_Conceptos{
 
     /**
      * Metodo para actualizar el nombre.
-     * 
-     * @param nombre 
+     *
+     * @param nombre
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -68,8 +68,8 @@ public class Asignatura implements Interfaz_Conceptos{
 
     /**
      * Metodo para obtener la lista de referencias de estudiantes.
-     * 
-     * @return 
+     *
+     * @return
      */
     public Lista_Ref_Estudiantes getRef_Estudiantes() {
         return ref_Estudiantes;
@@ -77,8 +77,8 @@ public class Asignatura implements Interfaz_Conceptos{
 
     /**
      * Metodo para actualizar la lista de referencias de estudiantes.
-     * 
-     * @param estudiantes 
+     *
+     * @param estudiantes
      */
     public void setRef_Estudiantes(Lista_Ref_Estudiantes estudiantes) {
         this.ref_Estudiantes = estudiantes;
@@ -86,8 +86,8 @@ public class Asignatura implements Interfaz_Conceptos{
 
     /**
      * Metodo para obtener la siguiente asignatura en la lista.
-     * 
-     * @return 
+     *
+     * @return
      */
     public Asignatura getSiguiente() {
         return siguiente;
@@ -95,21 +95,21 @@ public class Asignatura implements Interfaz_Conceptos{
 
     /**
      * Metodo para actualizar la siguiente asignatura en la lista.
-     * 
-     * @param siguiente 
+     *
+     * @param siguiente
      */
     public void setSiguiente(Asignatura siguiente) {
         this.siguiente = siguiente;
     }
-    
+
     /**
      * Metodo para imprimir el contenido de una asignatura.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "Codigo: " + this.codigo + " Nombre: " + this.nombre + ".";
     }
-    
+
 }

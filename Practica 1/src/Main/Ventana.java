@@ -15,12 +15,14 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 /**
+ * Interfaz grafica de la solucion. Desde aqui se llama a los metodos del
+ * archivo Operaciones.
  *
  * @author Felix Aguilar Ferrer, Adrian Bennassar Polzin, Alvaro Bueno Lopez.
  */
 public class Ventana extends JFrame {
 
-    Operations o = new Operations();
+    Operaciones o = new Operaciones();
 
     // Constantes del menú.
     private final String TITULO = "Practica 1";
@@ -108,55 +110,36 @@ public class Ventana extends JFrame {
         menu.add(butones, gbc);
 
         // Escuchadores de eventos.
-        botonNuevoCurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                nuevoCurso();
-            }
+        botonNuevoCurso.addActionListener((java.awt.event.ActionEvent e) -> {
+            nuevoCurso();
         });
 
-        botonMatriculaEstudiante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                matriculaEstudiante();
-
-            }
+        botonMatriculaEstudiante.addActionListener((java.awt.event.ActionEvent e) -> {
+            matriculaEstudiante();
         });
 
-        botonEliminarCurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                eliminarCurso();
-            }
+        botonEliminarCurso.addActionListener((java.awt.event.ActionEvent e) -> {
+            eliminarCurso();
         });
 
-        botonEliminarAsignatura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                eliminarAsignatura();
-            }
+        botonEliminarAsignatura.addActionListener((java.awt.event.ActionEvent e) -> {
+            eliminarAsignatura();
         });
 
-        botonMostrarCurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                mostrarCurso();
-            }
+        botonMostrarCurso.addActionListener((java.awt.event.ActionEvent e) -> {
+            mostrarCurso();
         });
 
-        botonMostrarAsignatura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                mostrarAsignatura();
-
-            }
+        botonMostrarAsignatura.addActionListener((java.awt.event.ActionEvent e) -> {
+            mostrarAsignatura();
         });
 
-        botonMostrarEstudiante.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                mostrarEstudiante();
-
-            }
+        botonMostrarEstudiante.addActionListener((java.awt.event.ActionEvent e) -> {
+            mostrarEstudiante();
         });
 
-        botonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                System.exit(0);
-            }
+        botonSalir.addActionListener((java.awt.event.ActionEvent e) -> {
+            System.exit(0);
         });
     }
 
@@ -224,17 +207,15 @@ public class Ventana extends JFrame {
         frame.pack();
 
         // Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                if (!codigo.getText().equals("") && !nombre.getText().equals("")) {
-                    if (tipoCurso.getSelectedItem() == "FP") {
-                        ventanaFP(Integer.parseInt(codigo.getText()), nombre.getText(), tipoCurso.getSelectedItem().toString());
-                    } else if (tipoCurso.getSelectedItem() == "Bachiller") {
-                        ventanaBachiller(Integer.parseInt(codigo.getText()), nombre.getText(), tipoCurso.getSelectedItem().toString());
-                    }
-                } else {
-                    Popup(frame, ERRORVACIO);
+        botonAceptar.addActionListener((java.awt.event.ActionEvent e) -> {
+            if (!codigo.getText().equals("") && !nombre.getText().equals("")) {
+                if (tipoCurso.getSelectedItem() == "FP") {
+                    ventanaFP(Integer.parseInt(codigo.getText()), nombre.getText(), tipoCurso.getSelectedItem().toString());
+                } else if (tipoCurso.getSelectedItem() == "Bachiller") {
+                    ventanaBachiller(Integer.parseInt(codigo.getText()), nombre.getText(), tipoCurso.getSelectedItem().toString());
                 }
+            } else {
+                Popup(frame, ERRORVACIO);
             }
         });
 
@@ -311,20 +292,18 @@ public class Ventana extends JFrame {
         frame.pack();
 
         // Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                if (!codigo.getText().equals("") && !nombre.getText().equals("") && !asignatura.getText().equals("")
-                        && !curso.getText().equals("")) {
+        botonAceptar.addActionListener((java.awt.event.ActionEvent e) -> {
+            if (!codigo.getText().equals("") && !nombre.getText().equals("") && !asignatura.getText().equals("")
+                    && !curso.getText().equals("")) {
 
-                    Asignatura asig = o.matricular_Estudiante(Integer.parseInt(curso.getText()), Integer.parseInt(asignatura.getText()),
-                            Integer.parseInt(codigo.getText()), nombre.getText());
-                    if (asig == null) {
-                        Popup(frame, "ERROR: Ha habido un error al matricular el estudiante");
-                    }
-                    frame.dispose();
-                } else {
-                    Popup(frame, ERRORVACIO);
+                Asignatura asig = o.matricular_Estudiante(Integer.parseInt(curso.getText()), Integer.parseInt(asignatura.getText()),
+                        Integer.parseInt(codigo.getText()), nombre.getText());
+                if (asig == null) {
+                    Popup(frame, "ERROR: Ha habido un error al matricular el estudiante");
                 }
+                frame.dispose();
+            } else {
+                Popup(frame, ERRORVACIO);
             }
         });
 
@@ -383,16 +362,14 @@ public class Ventana extends JFrame {
         frame.pack();
 
         // Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                Curso curso = o.nuevo_Curso(codigo, nombre, tipo, tipoFP.getSelectedItem().toString());
-                if (curso != null) {
-                    añadirAsignatura(curso);
-                } else {
-                    Popup(frame, "ERROR: Ya existe un curso con este código");
-                }
-                frame.dispose();
+        botonAceptar.addActionListener((java.awt.event.ActionEvent e) -> {
+            Curso curso = o.nuevo_Curso(codigo, nombre, tipo, tipoFP.getSelectedItem().toString());
+            if (curso != null) {
+                añadirAsignatura(curso);
+            } else {
+                Popup(frame, "ERROR: Ya existe un curso con este código");
             }
+            frame.dispose();
         });
 
     }
@@ -449,16 +426,14 @@ public class Ventana extends JFrame {
         frame.pack();
 
         // Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                Curso curso = o.nuevo_Curso(codigo, nombre, tipo, tipoBachiller.getSelectedItem().toString());
-                if (curso != null) {
-                    añadirAsignatura(curso);
-                } else {
-                    Popup(frame, "ERROR: Ya existe un curso con este código");
-                }
-                frame.dispose();
+        botonAceptar.addActionListener((java.awt.event.ActionEvent e) -> {
+            Curso curso = o.nuevo_Curso(codigo, nombre, tipo, tipoBachiller.getSelectedItem().toString());
+            if (curso != null) {
+                añadirAsignatura(curso);
+            } else {
+                Popup(frame, "ERROR: Ya existe un curso con este código");
             }
+            frame.dispose();
         });
 
     }
@@ -527,19 +502,17 @@ public class Ventana extends JFrame {
         frame.pack();
 
         // Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                if (!codigo.getText().equals("") && !nombre.getText().equals("")) {
-                    if (tipoAsignatura.getSelectedItem() == "Obligatoria") {
-                        ventanaCreditos(curso, Integer.parseInt(codigo.getText()), nombre.getText(),
-                                tipoAsignatura.getSelectedItem().toString());
-                    } else if (tipoAsignatura.getSelectedItem() == "Optativa") {
-                        ventanaPerfil(curso, Integer.parseInt(codigo.getText()), nombre.getText(),
-                                tipoAsignatura.getSelectedItem().toString());
-                    }
-                } else {
-                    Popup(frame, ERRORVACIO);
+        botonAceptar.addActionListener((java.awt.event.ActionEvent e) -> {
+            if (!codigo.getText().equals("") && !nombre.getText().equals("")) {
+                if (tipoAsignatura.getSelectedItem() == "Obligatoria") {
+                    ventanaCreditos(curso, Integer.parseInt(codigo.getText()), nombre.getText(),
+                            tipoAsignatura.getSelectedItem().toString());
+                } else if (tipoAsignatura.getSelectedItem() == "Optativa") {
+                    ventanaPerfil(curso, Integer.parseInt(codigo.getText()), nombre.getText(),
+                            tipoAsignatura.getSelectedItem().toString());
                 }
+            } else {
+                Popup(frame, ERRORVACIO);
             }
         });
 
@@ -595,17 +568,15 @@ public class Ventana extends JFrame {
         frame.pack();
 
         // Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                if (!creditos.getText().equals("")) {
-                    Asignatura asignatura = o.nueva_Asignatura(curso, codigo, nombre, tipo, creditos.getText());
-                    if (asignatura == null) {
-                        Popup(frame, "ERROR: Ya existe una asignatura con este código");
-                    }
-                    frame.dispose();
-                } else {
-                    Popup(frame, ERRORVACIO);
+        botonAceptar.addActionListener((java.awt.event.ActionEvent e) -> {
+            if (!creditos.getText().equals("")) {
+                Asignatura asignatura = o.nueva_Asignatura(curso, codigo, nombre, tipo, creditos.getText());
+                if (asignatura == null) {
+                    Popup(frame, "ERROR: Ya existe una asignatura con este código");
                 }
+                frame.dispose();
+            } else {
+                Popup(frame, ERRORVACIO);
             }
         });
 
@@ -663,14 +634,12 @@ public class Ventana extends JFrame {
         frame.pack();
 
         // Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                Asignatura asignatura = o.nueva_Asignatura(curso, codigo, nombre, tipo, tipoOptativa.getSelectedItem().toString());
-                if (asignatura == null) {
-                    Popup(frame, "ERROR: Ya existe una asignatura con este código");
-                }
-                frame.dispose();
+        botonAceptar.addActionListener((java.awt.event.ActionEvent e) -> {
+            Asignatura asignatura = o.nueva_Asignatura(curso, codigo, nombre, tipo, tipoOptativa.getSelectedItem().toString());
+            if (asignatura == null) {
+                Popup(frame, "ERROR: Ya existe una asignatura con este código");
             }
+            frame.dispose();
         });
 
     }
@@ -719,20 +688,18 @@ public class Ventana extends JFrame {
         frame.pack();
 
         // Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                if (!codigo.getText().equals("")) {
-                    String res;
-                    res = o.mostrar_Curso(Integer.parseInt(codigo.getText()));
-                    if (!res.equals("")) {
-                        Popup(frame, o.mostrar_Curso(Integer.parseInt(codigo.getText())));
-                    } else {
-                        Popup(frame, "ERROR: No existe ningún curso con este código");
-                    }
-                    frame.dispose();
+        botonAceptar.addActionListener((java.awt.event.ActionEvent e) -> {
+            if (!codigo.getText().equals("")) {
+                String res;
+                res = o.mostrar_Curso(Integer.parseInt(codigo.getText()));
+                if (!res.equals("")) {
+                    Popup(frame, o.mostrar_Curso(Integer.parseInt(codigo.getText())));
                 } else {
-                    Popup(frame, ERRORVACIO);
+                    Popup(frame, "ERROR: No existe ningún curso con este código");
                 }
+                frame.dispose();
+            } else {
+                Popup(frame, ERRORVACIO);
             }
         });
 
@@ -782,20 +749,18 @@ public class Ventana extends JFrame {
         frame.pack();
 
         // Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                if (!codigo.getText().equals("")) {
-                    String res;
-                    res = o.mostrar_Asignatura(Integer.parseInt(codigo.getText()));
-                    if (!res.equals("")) {
-                        Popup(frame, o.mostrar_Asignatura(Integer.parseInt(codigo.getText())));
-                    } else {
-                        Popup(frame, "ERROR: No existe ninguna asignatura con este código");
-                    }
-                    frame.dispose();
+        botonAceptar.addActionListener((java.awt.event.ActionEvent e) -> {
+            if (!codigo.getText().equals("")) {
+                String res;
+                res = o.mostrar_Asignatura(Integer.parseInt(codigo.getText()));
+                if (!res.equals("")) {
+                    Popup(frame, o.mostrar_Asignatura(Integer.parseInt(codigo.getText())));
                 } else {
-                    Popup(frame, ERRORVACIO);
+                    Popup(frame, "ERROR: No existe ninguna asignatura con este código");
                 }
+                frame.dispose();
+            } else {
+                Popup(frame, ERRORVACIO);
             }
         });
 
@@ -845,20 +810,18 @@ public class Ventana extends JFrame {
         frame.pack();
 
         // Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                if (!dni.getText().equals("")) {
-                    String res;
-                    res = o.mostrar_Estudiante(Integer.parseInt(dni.getText()));
-                    if (!res.equals("")) {
-                        Popup(frame, o.mostrar_Estudiante(Integer.parseInt(dni.getText())));
-                    } else {
-                        Popup(frame, "ERROR: No existe ningun estudiante con este DNI");
-                    }
-                    frame.dispose();
+        botonAceptar.addActionListener((java.awt.event.ActionEvent e) -> {
+            if (!dni.getText().equals("")) {
+                String res;
+                res = o.mostrar_Estudiante(Integer.parseInt(dni.getText()));
+                if (!res.equals("")) {
+                    Popup(frame, o.mostrar_Estudiante(Integer.parseInt(dni.getText())));
                 } else {
-                    Popup(frame, ERRORVACIO);
+                    Popup(frame, "ERROR: No existe ningun estudiante con este DNI");
                 }
+                frame.dispose();
+            } else {
+                Popup(frame, ERRORVACIO);
             }
         });
 
@@ -908,17 +871,15 @@ public class Ventana extends JFrame {
         frame.pack();
 
         // Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                if (!codigo.getText().equals("")) {
-                    Curso curso = o.eliminar_Curso(Integer.parseInt(codigo.getText()));
-                    if (curso == null) {
-                        Popup(frame, "ERROR: No existe ningun curso con este código");
-                    }
-                    frame.dispose();
-                } else {
-                    Popup(frame, ERRORVACIO);
+        botonAceptar.addActionListener((java.awt.event.ActionEvent e) -> {
+            if (!codigo.getText().equals("")) {
+                Curso curso = o.eliminar_Curso(Integer.parseInt(codigo.getText()));
+                if (curso == null) {
+                    Popup(frame, "ERROR: No existe ningun curso con este código");
                 }
+                frame.dispose();
+            } else {
+                Popup(frame, ERRORVACIO);
             }
         });
         return null;
@@ -969,17 +930,15 @@ public class Ventana extends JFrame {
         frame.pack();
 
         // Escuchadores de eventos.
-        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                if (!codigo.getText().equals("")) {
-                    Asignatura asignatura = o.eliminar_Asignatura(Integer.parseInt(codigo.getText()));
-                    if (asignatura == null) {
-                        Popup(frame, "ERROR: No existe ninguna asignatura con este código");
-                    }
-                    frame.dispose();
-                } else {
-                    Popup(frame, ERRORVACIO);
+        botonAceptar.addActionListener((java.awt.event.ActionEvent e) -> {
+            if (!codigo.getText().equals("")) {
+                Asignatura asignatura = o.eliminar_Asignatura(Integer.parseInt(codigo.getText()));
+                if (asignatura == null) {
+                    Popup(frame, "ERROR: No existe ninguna asignatura con este código");
                 }
+                frame.dispose();
+            } else {
+                Popup(frame, ERRORVACIO);
             }
         });
         return null;
@@ -999,10 +958,8 @@ public class Ventana extends JFrame {
         boton.setText("Cancelar");
 
         //Escuchadores de eventos.
-        boton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                frame.dispose();
-            }
+        boton.addActionListener((java.awt.event.ActionEvent e) -> {
+            frame.dispose();
         });
 
         return boton;

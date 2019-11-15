@@ -3,22 +3,22 @@ package Objects;
 import Interfaces.Interfaz_Conceptos;
 
 /**
- * Clase Obligatoria. Contiene los atributos y metodos que identifican una 
- * clase Obligatoria, esta es hija de la clase Asignatura.
- * 
+ * Clase Obligatoria. Contiene los atributos y metodos que identifican una clase
+ * Obligatoria, esta es hija de la clase Asignatura.
+ *
  * @author Felix Aguilar Ferrer, Adrian Bennasar Polzin, Alvaro Bueno Lopez.
  */
-public class Obligatoria extends Asignatura implements Interfaz_Conceptos{
-    
+public class Obligatoria extends Asignatura implements Interfaz_Conceptos {
+
     // Atributo.
     private int creditos;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param codigo
      * @param nombre
-     * @param creditos 
+     * @param creditos
      */
     public Obligatoria(int codigo, String nombre, int creditos) {
         super(codigo, nombre);
@@ -27,8 +27,8 @@ public class Obligatoria extends Asignatura implements Interfaz_Conceptos{
 
     /**
      * Metodo para obtener los creditos de la Asignatura.
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getCreditos() {
         return creditos;
@@ -36,23 +36,23 @@ public class Obligatoria extends Asignatura implements Interfaz_Conceptos{
 
     /**
      * Metodo para actualalizar los creditos de la asigntura.
-     * 
-     * @param creditos 
+     *
+     * @param creditos
      */
     public void setCreditos(int creditos) {
         this.creditos = creditos;
     }
-    
+
     /**
-     * Metodo que devuelve un string con los atributos de una asignatura. 
+     * Metodo que devuelve un string con los atributos de una asignatura.
      * Incluye el tipo de asignatura que es.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
-    public String toString(){
-        return "Codigo: " + this.getCodigo() + ", Nombre:" + this.getNombre() + 
-                ", Tipo: Obligatoria, Creditos: " + creditos + ".";
+    public String toString() {
+        return "Codigo: " + this.getCodigo() + ", Nombre:" + this.getNombre()
+                + ", Tipo: Obligatoria, Creditos: " + creditos + ".";
     }
-    
+
 }
